@@ -30,8 +30,7 @@
 
 -- If app property "LuaLoadAllEngineAPI" is FALSE, use this to load and check for required APIs
 -- This can improve performance of garbage collection
-
--- _G.availableAPIs = require('Communication/MultiTCPIPClient/helper/checkAPIs') -- can be used to adjust function scope of the module related on available APIs of the device
+ _G.availableAPIs = require('Communication/MultiTCPIPClient/helper/checkAPIs') -- can be used to adjust function scope of the module related on available APIs of the device
 -----------------------------------------------------------
 -- Logger
 _G.logger = Log.SharedLogger.create('ModuleLogger')
@@ -60,31 +59,6 @@ multiTCPIPClientController.setMultiTCPIPClient_Instances_Handle(multiTCPIPClient
 --**********************Start Function Scope *******************************
 --**************************************************************************
 
---[[
---- Function to show how this module could be used
-local function startProcessing()
-
-  CSK_MultiTCPIPClient.setSelectedInstance(1) --> select instance of module
-  CSK_MultiTCPIPClient.doSomething() --> preparation
-
-  -- Option A --> prepare an event to trigger processing via this one
-  --Script.serveEvent("CSK_MultiTCPIPClient.OnNewTestEvent", "MultiTCPIPClient_OnNewTestEvent") --> Create event to listen to and process forwarded object
-  --CSK_MultiTCPIPClient.setRegisterEvent('CSK_MultiTCPIPClient.OnNewTestEvent') --> Register processing to the event
-
-  --Script.notifyEvent('OnNewTestEvent', data)
-
-    -- Option B --> trigger processing via function call
-    local result = CSK_MultiTCPIPClient.processSomething(data)
-
-  end
-end
-
--- Call processing function after persistent data was loaded
---Script.register("CSK_MultiTCPIPClient.OnDataLoadedOnReboot", startProcessing)
-]]
-
---OR
-
 --- Function to react on startup event of the app
 local function main()
 
@@ -97,9 +71,30 @@ local function main()
   --       If so, the app will trigger the "OnDataLoadedOnReboot" event if ready after loading parameters
   --
   -- Can be used e.g. like this
+  --
+  --[[
+  CSK_MultiTCPIPClient.setSelectedInstance(1)
+  CSK_MultiTCPIPClient.setInterface('ETH1')
+  CSK_MultiTCPIPClient.setPort(1234)
+  CSK_MultiTCPIPClient.setServerAddress('192.168.0.99')
+
+  CSK_MultiTCPIPClient.setRxFraming('STX-ETX')
+  CSK_MultiTCPIPClient.setTxFraming('STX-ETX')
+
+  CSK_MultiTCPIPClient.startTCPIPClient()
+
+  CSK_MultiTCPIPClient.transmitData1('TestData')
+
+  CSK_MultiTCPIPClient.addEventToForward('CSK_OtherModule.OnNewEvent') -- Transmit content of this event via TCP/IP
+
+  -- Will create "CSK_MultiTCPIPClient.OnNewEvent" and if module receives 'TRG' it will trigger this event
+  CSK_MultiTCPIPClient.addTriggerEventPair('TRG', 'OnNewEvent')
+
+  --Register on event 'CSK_MultiTCPIPClient.OnNewData1' to get incoming data
+  ]]
   ----------------------------------------------------------------------------------------
 
-  --startProcessing() --> see above
+  CSK_MultiTCPIPClient.setSelectedInstance(1)
   CSK_MultiTCPIPClient.pageCalled() -- Update UI
 
 end

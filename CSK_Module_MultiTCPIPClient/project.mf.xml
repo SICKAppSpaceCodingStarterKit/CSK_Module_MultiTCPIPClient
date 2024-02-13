@@ -6,17 +6,92 @@
         </crown>
         <crown name="CSK_MultiTCPIPClient">
             <trait>released</trait>
-            <desc>Please fill in information regarding: What is the idea of this module and its features? +
-How to use this module in general.... like: +
+            <desc>Module to provide TCP/IP client functionality for multiple instances. Other modules can access its features / settings. +
+This module provides a UI for all relevant features. +
 {empty} + 
 Typically the features of this module are used like this (check also main script of this module): +
 {empty} + 
-**1) Setup** +
-ToDo +
+**1) Setup the TCP/IP client configuration** +
+- Select instance via 'setSelectedInstance'. +
+- Set IP address of TCP/IP server via 'setServerAddress'. +
+- Set port via 'setPort'. +
+- Set interface via 'setInterface'. +
+- Set framing via 'setRxFraming' and 'setTxFraming'. +
+- Connect to server via 'startTCPIPClient'. +
 {empty} + 
-**2) Something else....** +
-</desc>
+**2) Forward content via TCP/IP, also by other modules** +
+To send content via TCP/IP, there are different possibilities. +
+You can make use of 'transmitData[NUM]' to directly send the content with this function. +
+It is also possible to preset the content via 'setCommand' and after that send the preset content via 'transmitCommando' (e.g. used within the UI). +
+{empty} + 
+Additionally it is possible to configure the module to listen / wait for specific events of other modules/apps and to forward their content via TCP/IP. +
+This can be used e.g. to listen to 'OtherModule.OnNewResult'-events and to forward the results via TCP/IP (data will be converted to data type 'string'). +
+To do so make use of 'addEventToForward' (via script) or 'addEventToForwardViaUI' (event needs to be preset via 'setEventToForward'). +
+{empty} + 
+**3) Wait for incoming triggers** +
+It is possible to define trigger commandos to wait for and to forward this on another event, e.g. to another module. +
+This can be done e.g. via 'addTriggerEventPair("TRG", "OnNewTrigger")'. +
+By doing this, it will notify the 'CSK_MultiTCPIPClient.OnNewTrigger'-event if a 'TRG' is received on the client. +
+INFO: Events will dynamically created and served. Other modules can check via 'Script.isServedAsEvent' if event exists. +
+If there is additional content following the defined trigger command after a ',' it will also be forwarded withint the data content of the event. +
+The same can be done via the UI step by step (see 'setTrigger', 'setEventName', or 'addTriggerEventPairViaUI'). +
+{empty} + 
+**4) Listen for incoming content** +
+It is also possible to register on the 'CSK_MultiTCPIPClient.OnNewData[NUM]'-event by other modules to get the communication content.</desc>
+            <enum name="Communication_Frame" trait="released" type="string">
+                <desc>TCP/IP communication frame.</desc>
+                <item desc="No frame." name="empty">empty</item>
+                <item desc="STX / ETX framing." name="STX_ETX">STX-ETX</item>
+            </enum>
             <serves>
+                <event name="OnNewConnectionStatus">
+                    <desc>Notify configuration setup of TCP/IP connection status.</desc>
+                    <param desc="Status" multiplicity="1" name="status" type="bool"/>
+                </event>
+                <event name="OnNewServerIP">
+                    <desc>Notify TCP/IP server IP.</desc>
+                    <param desc="IP" multiplicity="1" name="serverIP" type="string"/>
+                </event>
+                <event name="OnNewPort">
+                    <desc>Notify port of TCP/IP connection.</desc>
+                    <param desc="Port" multiplicity="1" name="port" type="int"/>
+                </event>
+                <event name="OnNewLog">
+                    <desc>Notfiy latest log.</desc>
+                    <param desc="Log entries." multiplicity="1" name="log" type="string"/>
+                </event>
+                <event name="OnNewInterface">
+                    <desc>Notify selected interface for TCP/IP connection.</desc>
+                    <param desc="Interface" multiplicity="1" name="interface" type="string"/>
+                </event>
+                <event name="OnNewCurrentConnectionStatus">
+                    <desc>Notify current status of TCP/IP connection.</desc>
+                    <param desc="Status" multiplicity="1" name="status" type="bool"/>
+                </event>
+                <event name="OnNewCommand">
+                    <desc>Notify command to send.</desc>
+                    <param desc="Command to transmit." multiplicity="1" name="cmd" type="string"/>
+                </event>
+                <event name="OnNewTriggerEventPairList">
+                    <desc>Notify list of trigger/event pairs.</desc>
+                    <param desc="List" multiplicity="1" name="list" type="string"/>
+                </event>
+                <event name="OnNewInterfaceList">
+                    <desc>Notify list of available interfaces for TCP/IP connection.</desc>
+                    <param desc="List of interfaces." multiplicity="1" name="list" type="string"/>
+                </event>
+                <event name="OnNewRxFrame">
+                    <desc>Notify RxFrame.</desc>
+                    <param desc="frame" multiplicity="1" name="frame" type="string"/>
+                </event>
+                <event name="OnNewTxFrame">
+                    <desc>Notify TxFrame.</desc>
+                    <param desc="frame" multiplicity="1" name="frame" type="string"/>
+                </event>
+                <event name="OnNewEventToForwardList">
+                    <desc>Notify list of events to register to and to forward its content to TCP/IP server.</desc>
+                    <param desc="List" multiplicity="1" name="list" type="string"/>
+                </event>
                 <event name="OnNewStatusLoadParameterOnReboot">
                     <desc>Notify status if parameters should be loaded on app/device boot up.</desc>
                     <param desc="Status" multiplicity="1" name="status" type="bool"/>
@@ -33,8 +108,8 @@ ToDo +
                     <desc>Event to share processing parameters to the instances.</desc>
                     <param desc="Number of the instance to receive the parameter." multiplicity="1" name="objectNo" type="int"/>
                     <param desc="Name of the parameter." multiplicity="1" name="parameter" type="string"/>
-                    <param desc="Value of the parameter." multiplicity="1" name="value" type="auto"/>
-                    <param desc="If parameter is for specifici internal used object, its number." multiplicity="?" name="internalObjectNo" type="int"/>
+                    <param desc="Value of the parameter." multiplicity="?" name="value" type="auto"/>
+                    <param desc="2nd value of the parameter." multiplicity="?" name="value2" type="auto"/>
                 </event>
                 <event name="OnNewSelectedInstance">
                     <desc>Notify if new instance is selected.</desc>
@@ -43,11 +118,11 @@ ToDo +
                 <event name="OnDataLoadedOnReboot">
                     <desc>Event to call if module tried to load parameters and should be ready.</desc>
                 </event>
-                <event name="OnNewResultNUM">
-                    <desc>Example of dynamically created event to provide result of instance. +
-NUM will be replaced by the number of instance (e.g. "OnNewResult1"). +
+                <event name="OnNewDataNUM">
+                    <desc>Example of dynamically created event to provide received data of instance. +
+NUM will be replaced by the number of instance (e.g. "OnNewData1"). +
 INFO: Other modules can check via "Script.isServedAsEvent" if event of sepecific instance exists.</desc>
-                    <param desc="Result" multiplicity="1" name="result" type="bool"/>
+                    <param desc="Data" multiplicity="1" name="data" type="string"/>
                 </event>
                 <event name="OnNewParameterName">
                     <desc>Notify name of persistent data parameter.</desc>
@@ -91,6 +166,92 @@ NUM will be replaced by the number of instance (e.g. "OnNewResult1"). +</desc>
                     <desc>Notify event instance is registered to receive data to process.</desc>
                     <param desc="Name of event." multiplicity="1" name="eventname" type="string"/>
                 </event>
+                <function name="startTCPIPClient">
+                    <desc>Start TCP/IP client.</desc>
+                </function>
+                <function name="stopTCPIPClient">
+                    <desc>Stop TCP/IP client.</desc>
+                </function>
+                <function name="setServerAddress">
+                    <desc>Set IP of TCP/IP server.</desc>
+                    <param desc="IP" multiplicity="1" name="address" type="string"/>
+                </function>
+                <function name="setPort">
+                    <desc>Set port of TCP/IP connection.</desc>
+                    <param desc="Port" multiplicity="1" name="port" type="int"/>
+                </function>
+                <function name="setCommand">
+                    <desc>Set command to transmit via TCP/IP if triggered via "transmitCommando() (used in modules UI).</desc>
+                    <param desc="Command to transmit." multiplicity="1" name="cmd" type="string"/>
+                </function>
+                <function name="transmitCommando">
+                    <desc>Transmit preset commando via TCP/IP (used in module UI). See also "setCommand".</desc>
+                </function>
+                <function name="setConnectionStatus">
+                    <desc>Set status of TCP/IP connection.</desc>
+                    <param desc="Status" multiplicity="1" name="status" type="bool"/>
+                </function>
+                <function name="setTrigger">
+                    <desc>Set trigger command for trigger/event pair via UI.</desc>
+                    <param desc="Trigger command" multiplicity="1" name="value" type="string"/>
+                </function>
+                <function name="setEventValue">
+                    <desc>Set event for trigger/event pair via UI.</desc>
+                    <param desc="Event to notify." multiplicity="1" name="value" type="string"/>
+                </function>
+                <function name="addTriggerEventPairViaUI">
+                    <desc>Add pair of "trigger" and "event" via UI (parameters are prefilled on UI).</desc>
+                </function>
+                <function name="deleteTriggerEventPairViaUI">
+                    <desc>Remove trigger/event pair selected via modules UI.</desc>
+                </function>
+                <function name="deleteTriggerEventPair">
+                    <desc>Remove trigger/event pair via trigger name.</desc>
+                    <param desc="Trigger command" multiplicity="1" name="trigger" type="string"/>
+                </function>
+                <function name="addTriggerEventPair">
+                    <desc>Add a trigger command to wait for and the related event to call if the trigger command was received.</desc>
+                    <param desc="Trigger to listen on TCP/IP connection." multiplicity="1" name="trigger" type="string"/>
+                    <param desc="Name of event to notify if trigger command was received. +&#10;Prefix 'TCPIPClient.' will be used in front of the string." multiplicity="1" name="event" type="string"/>
+                </function>
+                <function name="selectTriggerEventPairViaUI">
+                    <desc>Select a trigger/event pair via UI.</desc>
+                    <param desc="Selected trigger/event pair." multiplicity="1" name="selection" type="string"/>
+                </function>
+                <function name="setInterface">
+                    <desc>Set interface for the TCP/IP connection.</desc>
+                    <param desc="Interface" multiplicity="1" name="interface" type="string"/>
+                </function>
+                <function name="setRxFraming">
+                    <desc>Set Rx frame of TCP/IP connection (only 'empty' or 'STX-ETX' supported). Will become active with next connection.</desc>
+                    <param desc="Frame to use." multiplicity="1" name="frame" ref="CSK_MultiTCPIPClient.Communication_Frame" type="enum"/>
+                </function>
+                <function name="setTxFraming">
+                    <desc>Set Tx frame of TCP/IP connection (only 'empty' or 'STX-ETX' supported). Will become active with next connection.</desc>
+                    <param desc="Frame to use." multiplicity="1" name="frame" ref="CSK_MultiTCPIPClient.Communication_Frame" type="enum"/>
+                </function>
+                <function name="selectEventToForwardViaUI">
+                    <desc>Select an event to forward the content of its first parameter to TCP/IP server via UI.</desc>
+                    <param desc="Selected event." multiplicity="1" name="selection" type="string"/>
+                </function>
+                <function name="addEventToForward">
+                    <desc>Add an event to register to and to forward the content of its first parameter (as string) to TCP/IP server.</desc>
+                    <param desc="Name of event to register to." multiplicity="1" name="event" type="string"/>
+                </function>
+                <function name="addEventToForwardViaUI">
+                    <desc>Add event to register to and forward content (first event parameter as string) to TCPI/IP server via UI (event needs to be prefilled on UI / via "setEventToForward").</desc>
+                </function>
+                <function name="deleteEventToForward">
+                    <desc>Remove event to forward content.</desc>
+                    <param desc="Eventname" multiplicity="1" name="event" type="string"/>
+                </function>
+                <function name="deleteEventToForwardViaUI">
+                    <desc>Remove event preselected via UI.</desc>
+                </function>
+                <function name="setEventToForward">
+                    <desc>Preset event to register to and forward content to TCP/IP server via UI.</desc>
+                    <param desc="Event to register to." multiplicity="1" name="value" type="string"/>
+                </function>
                 <function name="setParameterName">
                     <desc>Function to set the name of the parameters if saved/loaded via the CSK_PersistentData module.</desc>
                     <param desc="Name of the parameter" multiplicity="1" name="name" type="string"/>
@@ -117,18 +278,13 @@ NUM will be replaced by the number of instance (e.g. "OnNewResult1"). +</desc>
                     <desc>Get the amount of created instances of this module.</desc>
                     <return desc="Amount of created instances." multiplicity="1" name="amount" type="int"/>
                 </function>
-                <function name="setRegisterEvent">
-                    <desc>Configure event that this module should listen to. If this one is notified, it will be linked to internal processing function. +
-(Will be set to currently active instance, see "setSelectedObject")</desc>
-                    <param desc="(external) Event name to listen to." multiplicity="1" name="event" type="string"/>
-                </function>
-                <function name="processInstanceNUM">
-                    <desc>Example of dynamically served function to process internally coded function. +
-NUM will be replaced by the number of instance (e.g. "processInstance1"). +
+                <function name="transmitDataNUM">
+                    <desc>Example of dynamically served function to transmit data on specific instance. +
+NUM will be replaced by the number of instance (e.g. "transmitData1"). +
 INFO: Other modules can check via "Script.isServedAsFunction" if function of sepecific instance exists. +
 Needs then to be called via "Script.callFunction".</desc>
-                    <param alias="Alias" desc="Transferred object (optional)" multiplicity="?" name="object" type="object"/>
-                    <return desc="Processing result (optional)." multiplicity="?" name="result" type="bool"/>
+                    <param desc="Data to transmit." multiplicity="1" name="data" type="string"/>
+                    <return desc="Number of bytes transmitted ('0' if error)." multiplicity="1" name="numberOfBytesTransmitted" type="int"/>
                 </function>
                 <function name="addInstance">
                     <desc>Function to add an additional instance.</desc>
@@ -140,12 +296,12 @@ IMPORTANT: As instances start their own threads, the module needs to be restarte
             </serves>
         </crown>
         <meta key="author">SICK AG</meta>
-        <meta key="version">0.1.0</meta>
+        <meta key="version">1.0.0</meta>
         <meta key="priority">low</meta>
         <meta key="copy-protected">false</meta>
         <meta key="read-protected">false</meta>
         <meta key="crown2-flow-engine">false</meta>
-        <meta key="LuaLoadAllEngineAPI">true</meta>
+        <meta key="LuaLoadAllEngineAPI">false</meta>
         <entry default="CSK_Module_MultiTCPIPClient.lua" path="scripts"/>
     </application>
 </manifest>
