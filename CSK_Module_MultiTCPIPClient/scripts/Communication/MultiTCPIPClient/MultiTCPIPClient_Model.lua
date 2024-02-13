@@ -31,13 +31,6 @@ function multiTCPIPClient.create(multiTCPIPClientInstanceNo)
   self.multiTCPIPClientInstanceNoString = tostring(self.multiTCPIPClientInstanceNo) -- Number of this instance as string
   self.helperFuncs = require('Communication/MultiTCPIPClient/helper/funcs') -- Load helper functions
 
-  -- Optionally check if specific API was loaded via
-  --[[
-  if _G.availableAPIs.specific then
-  -- ... doSomething ...
-  end
-  ]]
-
   -- Create parameters etc. for this module instance
   self.activeInUI = false -- Check if this instance is currently active in UI
 
@@ -52,61 +45,54 @@ function multiTCPIPClient.create(multiTCPIPClientInstanceNo)
   self.parametersName = 'CSK_MultiTCPIPClient_Parameter' .. self.multiTCPIPClientInstanceNoString -- name of parameter dataset to be used for this module
   self.parameterLoadOnReboot = false -- Status if parameter dataset should be loaded on app/device reboot
 
-  --self.object = Image.create() -- Use any AppEngine CROWN
-  --self.counter = 1 -- Short docu of variable
-  --self.varA = 'value' -- Short docu of variable
+  self.currentConnectionStatus = false -- Status of TCP/IP connection to TCP/IP server
+  self.command = '' -- Temp command to preset to transmit
+  self.log = {} -- Log of TCP/IP communication
+  self.availableInterfaces = Engine.getEnumValues("EthernetInterfaces") -- Available ethernet interfaces on device
+  self.interfaceList = self.helperFuncs.createStringListBySimpleTable(self.availableInterfaces) -- List of ethernet interfaces
 
   -- Parameters to be saved permanently if wanted
   self.parameters = {}
-  self.parameters.registeredEvent = '' -- If thread internal function should react on external event, define it here, e.g. 'CSK_OtherModule.OnNewInput'
   self.parameters.processingFile = 'CSK_MultiTCPIPClient_Processing' -- which file to use for processing (will be started in own thread)
-  --self.parameters.showImage = true -- Short docu of variable
-  --self.parameters.paramA = 'paramA' -- Short docu of variable
-  --self.parameters.paramB = 123 -- Short docu of variable
 
-  self.parameters.internalObject = {} -- optionally
-  --self.parameters.selectedObject = 1 -- Which object is currently selected
-  --[[
-    for i = 1, 10 do
-    local obj = {}
+  self.parameters.connectionStatus = false -- Configure module to try to connect to server
 
-    obj.objectName = 'Object' .. tostring(i) -- name of the object
-    obj.active = false  -- is this object active
-    -- ...
+  -- List of incoming trigger commands to forward as events
+  -- e.g. "commandList['TRG'] = 'OnNewTrigger' will trigger the event "CSK_TCPIPClient.OnNewTrigger" if receiving 'TRG' via TCPIP connection
+  self.parameters.commandList = {}
 
-    table.insert(self.parameters.internalObject, obj)
+  -- List of events to register to and forward content to TCP/IP server
+  self.parameters.forwardEvents = {}
+
+  if self.availableInterfaces then
+    self.parameters.interface = self.availableInterfaces[1] -- e.g. 'ETH1' -- Select first available ethernet interface per default
+  else
+    self.parameters.interface = nil
   end
-
-  local internalObjectContainer = self.helperFuncs.convertTable2Container(self.parameters.internalObject)
-  ]]
+  self.parameters.serverIP = '192.168.0.202' -- IP of TCP/IP server
+  self.parameters.port = 1234 -- Port of TCP/IP connection
+  self.parameters.rxFrame = 'STX-ETX' -- OR 'empty' -- RX Frame
+  self.parameters.txFrame = 'STX-ETX' -- OR 'empty' -- TX Frame
 
   -- Parameters to give to the processing script
   self.multiTCPIPClientProcessingParams = Container.create()
   self.multiTCPIPClientProcessingParams:add('multiTCPIPClientInstanceNumber', multiTCPIPClientInstanceNo, "INT")
-  self.multiTCPIPClientProcessingParams:add('registeredEvent', self.parameters.registeredEvent, "STRING")
-  --self.multiTCPIPClientProcessingParams:add('showImage', self.parameters.showImage, "BOOL")
-  --self.multiTCPIPClientProcessingParams:add('viewerId', 'multiTCPIPClientViewer' .. self.multiTCPIPClientInstanceNoString, "STRING")
 
-  --self.multiTCPIPClientProcessingParams:add('internalObjects', internalObjectContainer, "OBJECT") -- optionally
-  --self.multiTCPIPClientProcessingParams:add('selectedObject', self.parameters.selectedObject, "INT")
+  self.multiTCPIPClientProcessingParams:add('currentConnectionStatus', self.currentConnectionStatus, "BOOL")
+  self.multiTCPIPClientProcessingParams:add('command', self.command, "STRING")
+
+  self.multiTCPIPClientProcessingParams:add('connectionStatus', self.parameters.connectionStatus, "BOOL")
+  self.multiTCPIPClientProcessingParams:add('interface', self.parameters.interface, "STRING")
+  self.multiTCPIPClientProcessingParams:add('serverIP', self.parameters.serverIP, "STRING")
+  self.multiTCPIPClientProcessingParams:add('port', self.parameters.port, "INT")
+  self.multiTCPIPClientProcessingParams:add('rxFrame', self.parameters.rxFrame, "STRING")
+  self.multiTCPIPClientProcessingParams:add('txFrame', self.parameters.txFrame, "STRING")  
 
   -- Handle processing
   Script.startScript(self.parameters.processingFile, self.multiTCPIPClientProcessingParams)
 
   return self
 end
-
---[[
---- Some internal code docu for local used function to do something
-function multiTCPIPClient:doSomething()
-  self.object:doSomething()
-end
-
---- Some internal code docu for local used function to do something else
-function multiTCPIPClient:doSomethingElse()
-  self:doSomething() --> access internal function
-end
-]]
 
 return multiTCPIPClient
 

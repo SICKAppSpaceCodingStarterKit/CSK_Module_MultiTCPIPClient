@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.12">
 <meta name="author" content="SICK AG">
-<title>Documentation - CSK_Module_MultiTCPIPClient 0.1.0</title>
+<title>Documentation - CSK_Module_MultiTCPIPClient 1.0.0</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 /* Stylesheet for CodeRay to match GitHub theme | MIT License | http://foundation.zurb.com */
@@ -615,10 +615,10 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 </head>
 <body class="article toc2 toc-left">
 <div id="header">
-<h1>Documentation - CSK_Module_MultiTCPIPClient 0.1.0</h1>
+<h1>Documentation - CSK_Module_MultiTCPIPClient 1.0.0</h1>
 <div class="details">
 <span id="author" class="author">SICK AG</span><br>
-<span id="revnumber">version 0.1.0,</span>
+<span id="revnumber">version 1.0.0,</span>
 <span id="revdate">2024-02-13</span>
 </div>
 <div id="toc" class="toc2">
@@ -638,30 +638,64 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 <li><a href="#_overview">Overview</a></li>
 <li><a href="#_functions">Functions</a>
 <ul class="sectlevel4">
+<li><a href="#API:Function:CSK_MultiTCPIPClient.addEventToForward"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">addEventToForward()</span></a></li>
+<li><a href="#API:Function:CSK_MultiTCPIPClient.addEventToForwardViaUI"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">addEventToForwardViaUI()</span></a></li>
 <li><a href="#API:Function:CSK_MultiTCPIPClient.addInstance"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">addInstance()</span></a></li>
+<li><a href="#API:Function:CSK_MultiTCPIPClient.addTriggerEventPair"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">addTriggerEventPair()</span></a></li>
+<li><a href="#API:Function:CSK_MultiTCPIPClient.addTriggerEventPairViaUI"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">addTriggerEventPairViaUI()</span></a></li>
+<li><a href="#API:Function:CSK_MultiTCPIPClient.deleteEventToForward"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">deleteEventToForward()</span></a></li>
+<li><a href="#API:Function:CSK_MultiTCPIPClient.deleteEventToForwardViaUI"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">deleteEventToForwardViaUI()</span></a></li>
+<li><a href="#API:Function:CSK_MultiTCPIPClient.deleteTriggerEventPair"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">deleteTriggerEventPair()</span></a></li>
+<li><a href="#API:Function:CSK_MultiTCPIPClient.deleteTriggerEventPairViaUI"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">deleteTriggerEventPairViaUI()</span></a></li>
 <li><a href="#API:Function:CSK_MultiTCPIPClient.getInstancesAmount"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">getInstancesAmount()</span></a></li>
 <li><a href="#API:Function:CSK_MultiTCPIPClient.loadParameters"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">loadParameters()</span></a></li>
 <li><a href="#API:Function:CSK_MultiTCPIPClient.pageCalled"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">pageCalled()</span></a></li>
-<li><a href="#API:Function:CSK_MultiTCPIPClient.processInstanceNUM"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">processInstanceNUM()</span></a></li>
 <li><a href="#API:Function:CSK_MultiTCPIPClient.resetInstances"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">resetInstances()</span></a></li>
+<li><a href="#API:Function:CSK_MultiTCPIPClient.selectEventToForwardViaUI"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">selectEventToForwardViaUI()</span></a></li>
+<li><a href="#API:Function:CSK_MultiTCPIPClient.selectTriggerEventPairViaUI"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">selectTriggerEventPairViaUI()</span></a></li>
 <li><a href="#API:Function:CSK_MultiTCPIPClient.sendParameters"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">sendParameters()</span></a></li>
+<li><a href="#API:Function:CSK_MultiTCPIPClient.setCommand"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setCommand()</span></a></li>
+<li><a href="#API:Function:CSK_MultiTCPIPClient.setConnectionStatus"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setConnectionStatus()</span></a></li>
+<li><a href="#API:Function:CSK_MultiTCPIPClient.setEventToForward"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setEventToForward()</span></a></li>
+<li><a href="#API:Function:CSK_MultiTCPIPClient.setEventValue"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setEventValue()</span></a></li>
+<li><a href="#API:Function:CSK_MultiTCPIPClient.setInterface"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setInterface()</span></a></li>
 <li><a href="#API:Function:CSK_MultiTCPIPClient.setLoadOnReboot"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setLoadOnReboot()</span></a></li>
 <li><a href="#API:Function:CSK_MultiTCPIPClient.setParameterName"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setParameterName()</span></a></li>
-<li><a href="#API:Function:CSK_MultiTCPIPClient.setRegisterEvent"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setRegisterEvent()</span></a></li>
+<li><a href="#API:Function:CSK_MultiTCPIPClient.setPort"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setPort()</span></a></li>
+<li><a href="#API:Function:CSK_MultiTCPIPClient.setRxFraming"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setRxFraming()</span></a></li>
 <li><a href="#API:Function:CSK_MultiTCPIPClient.setSelectedInstance"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setSelectedInstance()</span></a></li>
+<li><a href="#API:Function:CSK_MultiTCPIPClient.setServerAddress"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setServerAddress()</span></a></li>
+<li><a href="#API:Function:CSK_MultiTCPIPClient.setTrigger"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setTrigger()</span></a></li>
+<li><a href="#API:Function:CSK_MultiTCPIPClient.setTxFraming"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setTxFraming()</span></a></li>
+<li><a href="#API:Function:CSK_MultiTCPIPClient.startTCPIPClient"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">startTCPIPClient()</span></a></li>
+<li><a href="#API:Function:CSK_MultiTCPIPClient.stopTCPIPClient"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">stopTCPIPClient()</span></a></li>
+<li><a href="#API:Function:CSK_MultiTCPIPClient.transmitCommando"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">transmitCommando()</span></a></li>
+<li><a href="#API:Function:CSK_MultiTCPIPClient.transmitDataNUM"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">transmitDataNUM()</span></a></li>
 </ul>
 </li>
 <li><a href="#_events">Events</a>
 <ul class="sectlevel4">
 <li><a href="#API:Event:CSK_MultiTCPIPClient.OnDataLoadedOnReboot"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnDataLoadedOnReboot</span></a></li>
+<li><a href="#API:Event:CSK_MultiTCPIPClient.OnNewCommand"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewCommand</span></a></li>
+<li><a href="#API:Event:CSK_MultiTCPIPClient.OnNewConnectionStatus"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewConnectionStatus</span></a></li>
+<li><a href="#API:Event:CSK_MultiTCPIPClient.OnNewCurrentConnectionStatus"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewCurrentConnectionStatus</span></a></li>
+<li><a href="#API:Event:CSK_MultiTCPIPClient.OnNewDataNUM"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewDataNUM</span></a></li>
+<li><a href="#API:Event:CSK_MultiTCPIPClient.OnNewEventToForwardList"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewEventToForwardList</span></a></li>
 <li><a href="#API:Event:CSK_MultiTCPIPClient.OnNewInstanceList"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewInstanceList</span></a></li>
+<li><a href="#API:Event:CSK_MultiTCPIPClient.OnNewInterface"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewInterface</span></a></li>
+<li><a href="#API:Event:CSK_MultiTCPIPClient.OnNewInterfaceList"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewInterfaceList</span></a></li>
+<li><a href="#API:Event:CSK_MultiTCPIPClient.OnNewLog"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewLog</span></a></li>
 <li><a href="#API:Event:CSK_MultiTCPIPClient.OnNewParameterName"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewParameterName</span></a></li>
+<li><a href="#API:Event:CSK_MultiTCPIPClient.OnNewPort"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewPort</span></a></li>
 <li><a href="#API:Event:CSK_MultiTCPIPClient.OnNewProcessingParameter"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewProcessingParameter</span></a></li>
 <li><a href="#API:Event:CSK_MultiTCPIPClient.OnNewResult"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewResult</span></a></li>
-<li><a href="#API:Event:CSK_MultiTCPIPClient.OnNewResultNUM"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewResultNUM</span></a></li>
+<li><a href="#API:Event:CSK_MultiTCPIPClient.OnNewRxFrame"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewRxFrame</span></a></li>
 <li><a href="#API:Event:CSK_MultiTCPIPClient.OnNewSelectedInstance"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewSelectedInstance</span></a></li>
+<li><a href="#API:Event:CSK_MultiTCPIPClient.OnNewServerIP"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewServerIP</span></a></li>
 <li><a href="#API:Event:CSK_MultiTCPIPClient.OnNewStatusLoadParameterOnReboot"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewStatusLoadParameterOnReboot</span></a></li>
 <li><a href="#API:Event:CSK_MultiTCPIPClient.OnNewStatusRegisteredEvent"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewStatusRegisteredEvent</span></a></li>
+<li><a href="#API:Event:CSK_MultiTCPIPClient.OnNewTriggerEventPairList"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewTriggerEventPairList</span></a></li>
+<li><a href="#API:Event:CSK_MultiTCPIPClient.OnNewTxFrame"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewTxFrame</span></a></li>
 <li><a href="#API:Event:CSK_MultiTCPIPClient.OnNewValueToForwardNUM"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewValueToForwardNUM</span></a></li>
 <li><a href="#API:Event:CSK_MultiTCPIPClient.OnNewValueUpdateNUM"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewValueUpdateNUM</span></a></li>
 <li><a href="#API:Event:CSK_MultiTCPIPClient.OnPersistentDataModuleAvailable"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnPersistentDataModuleAvailable</span></a></li>
@@ -673,6 +707,11 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 </li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="#_enumerations">Enumerations</a>
+<ul class="sectlevel2">
+<li><a href="#API:Enum:CSK_MultiTCPIPClient.Communication_Frame"><span class="api-enum">CSK_MultiTCPIPClient.Communication_Frame</span></a></li>
 </ul>
 </li>
 </ul>
@@ -694,7 +733,7 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Version</p></th>
-<td class="tableblock halign-left valign-top"><p class="tableblock">0.1.0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1.0.0</p></td>
 </tr>
 <tr>
 <th class="tableblock halign-left valign-top"><p class="tableblock">Date</p></th>
@@ -742,15 +781,38 @@ h1,h2,h3,h4,h5,h6{color:#007cc1}
 <div class="sect3">
 <h4 id="_short_description_2">Short description</h4>
 <div class="paragraph">
-<p>Please fill in information regarding: What is the idea of this module and its features?<br>
-How to use this module in general&#8230;&#8203;. like:<br>
+<p>Module to provide TCP/IP client functionality for multiple instances. Other modules can access its features / settings.<br>
+This module provides a UI for all relevant features.<br>
 <br>
 Typically the features of this module are used like this (check also main script of this module):<br>
 <br>
-<strong>1) Setup</strong><br>
-ToDo<br>
+<strong>1) Setup the TCP/IP client configuration</strong><br>
+- Select instance via 'setSelectedInstance'.<br>
+- Set IP address of TCP/IP server via 'setServerAddress'.<br>
+- Set port via 'setPort'.<br>
+- Set interface via 'setInterface'.<br>
+- Set framing via 'setRxFraming' and 'setTxFraming'.<br>
+- Connect to server via 'startTCPIPClient'.<br>
 <br>
-<strong>2) Something else&#8230;&#8203;.</strong><br></p>
+<strong>2) Forward content via TCP/IP, also by other modules</strong><br>
+To send content via TCP/IP, there are different possibilities.<br>
+You can make use of 'transmitData[NUM]' to directly send the content with this function.<br>
+It is also possible to preset the content via 'setCommand' and after that send the preset content via 'transmitCommando' (e.g. used within the UI).<br>
+<br>
+Additionally it is possible to configure the module to listen / wait for specific events of other modules/apps and to forward their content via TCP/IP.<br>
+This can be used e.g. to listen to 'OtherModule.OnNewResult'-events and to forward the results via TCP/IP (data will be converted to data type 'string').<br>
+To do so make use of 'addEventToForward' (via script) or 'addEventToForwardViaUI' (event needs to be preset via 'setEventToForward').<br>
+<br>
+<strong>3) Wait for incoming triggers</strong><br>
+It is possible to define trigger commandos to wait for and to forward this on another event, e.g. to another module.<br>
+This can be done e.g. via 'addTriggerEventPair("TRG", "OnNewTrigger")'.<br>
+By doing this, it will notify the 'CSK_MultiTCPIPClient.OnNewTrigger'-event if a 'TRG' is received on the client.<br>
+INFO: Events will dynamically created and served. Other modules can check via 'Script.isServedAsEvent' if event exists.<br>
+If there is additional content following the defined trigger command after a ',' it will also be forwarded withint the data content of the event.<br>
+The same can be done via the UI step by step (see 'setTrigger', 'setEventName', or 'addTriggerEventPairViaUI').<br>
+<br>
+<strong>4) Listen for incoming content</strong><br>
+It is also possible to register on the 'CSK_MultiTCPIPClient.OnNewData[NUM]'-event by other modules to get the communication content.</p>
 </div>
 </div>
 <div class="sect3">
@@ -758,7 +820,31 @@ ToDo<br>
 <div class="ulist">
 <ul>
 <li>
+<p><a href="#API:Function:CSK_MultiTCPIPClient.addEventToForward">addEventToForward()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_MultiTCPIPClient.addEventToForwardViaUI">addEventToForwardViaUI()</a></p>
+</li>
+<li>
 <p><a href="#API:Function:CSK_MultiTCPIPClient.addInstance">addInstance()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_MultiTCPIPClient.addTriggerEventPair">addTriggerEventPair()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_MultiTCPIPClient.addTriggerEventPairViaUI">addTriggerEventPairViaUI()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_MultiTCPIPClient.deleteEventToForward">deleteEventToForward()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_MultiTCPIPClient.deleteEventToForwardViaUI">deleteEventToForwardViaUI()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_MultiTCPIPClient.deleteTriggerEventPair">deleteTriggerEventPair()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_MultiTCPIPClient.deleteTriggerEventPairViaUI">deleteTriggerEventPairViaUI()</a></p>
 </li>
 <li>
 <p><a href="#API:Function:CSK_MultiTCPIPClient.getInstancesAmount">getInstancesAmount()</a></p>
@@ -770,13 +856,31 @@ ToDo<br>
 <p><a href="#API:Function:CSK_MultiTCPIPClient.pageCalled">pageCalled()</a></p>
 </li>
 <li>
-<p><a href="#API:Function:CSK_MultiTCPIPClient.processInstanceNUM">processInstanceNUM()</a></p>
-</li>
-<li>
 <p><a href="#API:Function:CSK_MultiTCPIPClient.resetInstances">resetInstances()</a></p>
 </li>
 <li>
+<p><a href="#API:Function:CSK_MultiTCPIPClient.selectEventToForwardViaUI">selectEventToForwardViaUI()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_MultiTCPIPClient.selectTriggerEventPairViaUI">selectTriggerEventPairViaUI()</a></p>
+</li>
+<li>
 <p><a href="#API:Function:CSK_MultiTCPIPClient.sendParameters">sendParameters()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_MultiTCPIPClient.setCommand">setCommand()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_MultiTCPIPClient.setConnectionStatus">setConnectionStatus()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_MultiTCPIPClient.setEventToForward">setEventToForward()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_MultiTCPIPClient.setEventValue">setEventValue()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_MultiTCPIPClient.setInterface">setInterface()</a></p>
 </li>
 <li>
 <p><a href="#API:Function:CSK_MultiTCPIPClient.setLoadOnReboot">setLoadOnReboot()</a></p>
@@ -785,19 +889,70 @@ ToDo<br>
 <p><a href="#API:Function:CSK_MultiTCPIPClient.setParameterName">setParameterName()</a></p>
 </li>
 <li>
-<p><a href="#API:Function:CSK_MultiTCPIPClient.setRegisterEvent">setRegisterEvent()</a></p>
+<p><a href="#API:Function:CSK_MultiTCPIPClient.setPort">setPort()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_MultiTCPIPClient.setRxFraming">setRxFraming()</a></p>
 </li>
 <li>
 <p><a href="#API:Function:CSK_MultiTCPIPClient.setSelectedInstance">setSelectedInstance()</a></p>
 </li>
 <li>
+<p><a href="#API:Function:CSK_MultiTCPIPClient.setServerAddress">setServerAddress()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_MultiTCPIPClient.setTrigger">setTrigger()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_MultiTCPIPClient.setTxFraming">setTxFraming()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_MultiTCPIPClient.startTCPIPClient">startTCPIPClient()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_MultiTCPIPClient.stopTCPIPClient">stopTCPIPClient()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_MultiTCPIPClient.transmitCommando">transmitCommando()</a></p>
+</li>
+<li>
+<p><a href="#API:Function:CSK_MultiTCPIPClient.transmitDataNUM">transmitDataNUM()</a></p>
+</li>
+<li>
 <p><a href="#API:Event:CSK_MultiTCPIPClient.OnDataLoadedOnReboot">OnDataLoadedOnReboot</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_MultiTCPIPClient.OnNewCommand">OnNewCommand</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_MultiTCPIPClient.OnNewConnectionStatus">OnNewConnectionStatus</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_MultiTCPIPClient.OnNewCurrentConnectionStatus">OnNewCurrentConnectionStatus</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_MultiTCPIPClient.OnNewDataNUM">OnNewDataNUM</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_MultiTCPIPClient.OnNewEventToForwardList">OnNewEventToForwardList</a></p>
 </li>
 <li>
 <p><a href="#API:Event:CSK_MultiTCPIPClient.OnNewInstanceList">OnNewInstanceList</a></p>
 </li>
 <li>
+<p><a href="#API:Event:CSK_MultiTCPIPClient.OnNewInterface">OnNewInterface</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_MultiTCPIPClient.OnNewInterfaceList">OnNewInterfaceList</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_MultiTCPIPClient.OnNewLog">OnNewLog</a></p>
+</li>
+<li>
 <p><a href="#API:Event:CSK_MultiTCPIPClient.OnNewParameterName">OnNewParameterName</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_MultiTCPIPClient.OnNewPort">OnNewPort</a></p>
 </li>
 <li>
 <p><a href="#API:Event:CSK_MultiTCPIPClient.OnNewProcessingParameter">OnNewProcessingParameter</a></p>
@@ -806,16 +961,25 @@ ToDo<br>
 <p><a href="#API:Event:CSK_MultiTCPIPClient.OnNewResult">OnNewResult</a></p>
 </li>
 <li>
-<p><a href="#API:Event:CSK_MultiTCPIPClient.OnNewResultNUM">OnNewResultNUM</a></p>
+<p><a href="#API:Event:CSK_MultiTCPIPClient.OnNewRxFrame">OnNewRxFrame</a></p>
 </li>
 <li>
 <p><a href="#API:Event:CSK_MultiTCPIPClient.OnNewSelectedInstance">OnNewSelectedInstance</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_MultiTCPIPClient.OnNewServerIP">OnNewServerIP</a></p>
 </li>
 <li>
 <p><a href="#API:Event:CSK_MultiTCPIPClient.OnNewStatusLoadParameterOnReboot">OnNewStatusLoadParameterOnReboot</a></p>
 </li>
 <li>
 <p><a href="#API:Event:CSK_MultiTCPIPClient.OnNewStatusRegisteredEvent">OnNewStatusRegisteredEvent</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_MultiTCPIPClient.OnNewTriggerEventPairList">OnNewTriggerEventPairList</a></p>
+</li>
+<li>
+<p><a href="#API:Event:CSK_MultiTCPIPClient.OnNewTxFrame">OnNewTxFrame</a></p>
 </li>
 <li>
 <p><a href="#API:Event:CSK_MultiTCPIPClient.OnNewValueToForwardNUM">OnNewValueToForwardNUM</a></p>
@@ -844,15 +1008,76 @@ ToDo<br>
 <div class="sect3">
 <h4 id="_functions">Functions</h4>
 <div class="sect4">
-<h5 id="API:Function:CSK_MultiTCPIPClient.addInstance"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">addInstance()</span></h5>
+<h5 id="API:Function:CSK_MultiTCPIPClient.addEventToForward"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">addEventToForward()</span></h5>
 <div class="sect5">
 <h6 id="_short_description_3">Short description</h6>
+<div class="paragraph">
+<p>Add an event to register to and to forward the content of its first parameter (as string) to TCP/IP server.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">event</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of event to register to.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.addEventToForward(event)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_MultiTCPIPClient.addEventToForwardViaUI"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">addEventToForwardViaUI()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_4">Short description</h6>
+<div class="paragraph">
+<p>Add event to register to and forward content (first event parameter as string) to TCPI/IP server via UI (event needs to be prefilled on UI / via "setEventToForward").</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_2">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.addEventToForwardViaUI()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_MultiTCPIPClient.addInstance"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">addInstance()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_5">Short description</h6>
 <div class="paragraph">
 <p>Function to add an additional instance.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_3">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.addInstance()</code></pre>
@@ -861,9 +1086,199 @@ ToDo<br>
 </div>
 </div>
 <div class="sect4">
+<h5 id="API:Function:CSK_MultiTCPIPClient.addTriggerEventPair"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">addTriggerEventPair()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_6">Short description</h6>
+<div class="paragraph">
+<p>Add a trigger command to wait for and the related event to call if the trigger command was received.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_2">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">trigger</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Trigger to listen on TCP/IP connection.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">event</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name of event to notify if trigger command was received.<br>
+Prefix 'TCPIPClient.' will be used in front of the string.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_4">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.addTriggerEventPair(trigger, event)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_MultiTCPIPClient.addTriggerEventPairViaUI"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">addTriggerEventPairViaUI()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_7">Short description</h6>
+<div class="paragraph">
+<p>Add pair of "trigger" and "event" via UI (parameters are prefilled on UI).</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_5">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.addTriggerEventPairViaUI()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_MultiTCPIPClient.deleteEventToForward"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">deleteEventToForward()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_8">Short description</h6>
+<div class="paragraph">
+<p>Remove event to forward content.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_3">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">event</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Eventname</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_6">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.deleteEventToForward(event)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_MultiTCPIPClient.deleteEventToForwardViaUI"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">deleteEventToForwardViaUI()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_9">Short description</h6>
+<div class="paragraph">
+<p>Remove event preselected via UI.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_7">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.deleteEventToForwardViaUI()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_MultiTCPIPClient.deleteTriggerEventPair"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">deleteTriggerEventPair()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_10">Short description</h6>
+<div class="paragraph">
+<p>Remove trigger/event pair via trigger name.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_4">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">trigger</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Trigger command</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_8">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.deleteTriggerEventPair(trigger)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_MultiTCPIPClient.deleteTriggerEventPairViaUI"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">deleteTriggerEventPairViaUI()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_11">Short description</h6>
+<div class="paragraph">
+<p>Remove trigger/event pair selected via modules UI.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_9">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.deleteTriggerEventPairViaUI()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
 <h5 id="API:Function:CSK_MultiTCPIPClient.getInstancesAmount"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">getInstancesAmount()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_4">Short description</h6>
+<h6 id="_short_description_12">Short description</h6>
 <div class="paragraph">
 <p>Get the amount of created instances of this module.</p>
 </div>
@@ -896,7 +1311,7 @@ ToDo<br>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_2">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_10">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">amount = CSK_MultiTCPIPClient.getInstancesAmount()</code></pre>
@@ -907,13 +1322,13 @@ ToDo<br>
 <div class="sect4">
 <h5 id="API:Function:CSK_MultiTCPIPClient.loadParameters"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">loadParameters()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_5">Short description</h6>
+<h6 id="_short_description_13">Short description</h6>
 <div class="paragraph">
 <p>Load parameters for this module from the CSK_PersistentData module if possible and use them.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_3">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_11">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.loadParameters()</code></pre>
@@ -924,7 +1339,7 @@ ToDo<br>
 <div class="sect4">
 <h5 id="API:Function:CSK_MultiTCPIPClient.pageCalled"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">pageCalled()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_6">Short description</h6>
+<h6 id="_short_description_14">Short description</h6>
 <div class="paragraph">
 <p>Function to register "OnResume" of the module UI (only as helper function).</p>
 </div>
@@ -957,7 +1372,7 @@ ToDo<br>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_4">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_12">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">empty = CSK_MultiTCPIPClient.pageCalled()</code></pre>
@@ -966,91 +1381,16 @@ ToDo<br>
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Function:CSK_MultiTCPIPClient.processInstanceNUM"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">processInstanceNUM()</span></h5>
-<div class="sect5">
-<h6 id="_short_description_7">Short description</h6>
-<div class="paragraph">
-<p>Example of dynamically served function to process internally coded function.<br>
-NUM will be replaced by the number of instance (e.g. "processInstance1").<br>
-INFO: Other modules can check via "Script.isServedAsFunction" if function of sepecific instance exists.<br>
-Needs then to be called via "Script.callFunction".</p>
-</div>
-</div>
-<div class="sect5">
-<h6 id="_parameters">Parameters</h6>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 12.5%;">
-<col style="width: 37.5%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Multiplicity</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">object</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">OBJECT<br>
-<a href="#API:Crown:Alias">Alias</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">?</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Transferred object (optional)</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect5">
-<h6 id="_return_values_3">Return values</h6>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 25%;">
-<col style="width: 25%;">
-<col style="width: 12.5%;">
-<col style="width: 37.5%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Name</th>
-<th class="tableblock halign-left valign-top">Type</th>
-<th class="tableblock halign-left valign-top">Multiplicity</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">result</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">?</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Processing result (optional).</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="sect5">
-<h6 id="_sample_auto_generated_5">Sample (auto-generated)</h6>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">result = CSK_MultiTCPIPClient.processInstanceNUM(object)</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect4">
 <h5 id="API:Function:CSK_MultiTCPIPClient.resetInstances"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">resetInstances()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_8">Short description</h6>
+<h6 id="_short_description_15">Short description</h6>
 <div class="paragraph">
 <p>Function to reset instances to one single instance.<br>
 IMPORTANT: As instances start their own threads, the module needs to be restarted if new instances are needed&#8230;&#8203; (see AppEngine docu for "Script.startScript").</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_6">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_13">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.resetInstances()</code></pre>
@@ -1059,15 +1399,103 @@ IMPORTANT: As instances start their own threads, the module needs to be restarte
 </div>
 </div>
 <div class="sect4">
+<h5 id="API:Function:CSK_MultiTCPIPClient.selectEventToForwardViaUI"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">selectEventToForwardViaUI()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_16">Short description</h6>
+<div class="paragraph">
+<p>Select an event to forward the content of its first parameter to TCP/IP server via UI.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_5">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">selection</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Selected event.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_14">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.selectEventToForwardViaUI(selection)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_MultiTCPIPClient.selectTriggerEventPairViaUI"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">selectTriggerEventPairViaUI()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_17">Short description</h6>
+<div class="paragraph">
+<p>Select a trigger/event pair via UI.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_6">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">selection</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Selected trigger/event pair.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_15">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.selectTriggerEventPairViaUI(selection)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
 <h5 id="API:Function:CSK_MultiTCPIPClient.sendParameters"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">sendParameters()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_9">Short description</h6>
+<h6 id="_short_description_18">Short description</h6>
 <div class="paragraph">
 <p>Send parameters to CSK_PersistentData module if possible to save them.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_7">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_16">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.sendParameters()</code></pre>
@@ -1076,15 +1504,235 @@ IMPORTANT: As instances start their own threads, the module needs to be restarte
 </div>
 </div>
 <div class="sect4">
+<h5 id="API:Function:CSK_MultiTCPIPClient.setCommand"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setCommand()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_19">Short description</h6>
+<div class="paragraph">
+<p>Set command to transmit via TCP/IP if triggered via "transmitCommando() (used in modules UI).</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_7">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cmd</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Command to transmit.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_17">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.setCommand(cmd)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_MultiTCPIPClient.setConnectionStatus"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setConnectionStatus()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_20">Short description</h6>
+<div class="paragraph">
+<p>Set status of TCP/IP connection.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_8">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_18">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.setConnectionStatus(status)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_MultiTCPIPClient.setEventToForward"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setEventToForward()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_21">Short description</h6>
+<div class="paragraph">
+<p>Preset event to register to and forward content to TCP/IP server via UI.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_9">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Event to register to.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_19">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.setEventToForward(value)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_MultiTCPIPClient.setEventValue"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setEventValue()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_22">Short description</h6>
+<div class="paragraph">
+<p>Set event for trigger/event pair via UI.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_10">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Event to notify.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_20">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.setEventValue(value)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_MultiTCPIPClient.setInterface"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setInterface()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_23">Short description</h6>
+<div class="paragraph">
+<p>Set interface for the TCP/IP connection.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_11">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">interface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interface</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_21">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.setInterface(interface)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
 <h5 id="API:Function:CSK_MultiTCPIPClient.setLoadOnReboot"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setLoadOnReboot()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_10">Short description</h6>
+<h6 id="_short_description_24">Short description</h6>
 <div class="paragraph">
 <p>Configure if this module should load its saved parameters at app/ device boot up.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_2">Parameters</h6>
+<h6 id="_parameters_12">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1111,7 +1759,7 @@ IMPORTANT: As instances start their own threads, the module needs to be restarte
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_8">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_22">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.setLoadOnReboot(status)</code></pre>
@@ -1122,13 +1770,13 @@ IMPORTANT: As instances start their own threads, the module needs to be restarte
 <div class="sect4">
 <h5 id="API:Function:CSK_MultiTCPIPClient.setParameterName"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setParameterName()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_11">Short description</h6>
+<h6 id="_short_description_25">Short description</h6>
 <div class="paragraph">
 <p>Function to set the name of the parameters if saved/loaded via the CSK_PersistentData module.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_3">Parameters</h6>
+<h6 id="_parameters_13">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1155,7 +1803,7 @@ IMPORTANT: As instances start their own threads, the module needs to be restarte
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_9">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_23">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.setParameterName(name)</code></pre>
@@ -1164,16 +1812,15 @@ IMPORTANT: As instances start their own threads, the module needs to be restarte
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Function:CSK_MultiTCPIPClient.setRegisterEvent"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setRegisterEvent()</span></h5>
+<h5 id="API:Function:CSK_MultiTCPIPClient.setPort"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setPort()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_12">Short description</h6>
+<h6 id="_short_description_26">Short description</h6>
 <div class="paragraph">
-<p>Configure event that this module should listen to. If this one is notified, it will be linked to internal processing function.<br>
-(Will be set to currently active instance, see "setSelectedObject")</p>
+<p>Set port of TCP/IP connection.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_4">Parameters</h6>
+<h6 id="_parameters_14">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1191,19 +1838,64 @@ IMPORTANT: As instances start their own threads, the module needs to be restarte
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">event</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">port</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">(external) Event name to listen to.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Port</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_10">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_24">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.setRegisterEvent(event)</code></pre>
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.setPort(port)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_MultiTCPIPClient.setRxFraming"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setRxFraming()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_27">Short description</h6>
+<div class="paragraph">
+<p>Set Rx frame of TCP/IP connection (only 'empty' or 'STX-ETX' supported). Will become active with next connection.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_15">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">frame</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ENUM<br>
+<a href="#API:Enum:CSK_MultiTCPIPClient.Communication_Frame">CSK_MultiTCPIPClient.Communication_Frame</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Frame to use.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_25">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.setRxFraming(frame)</code></pre>
 </div>
 </div>
 </div>
@@ -1211,13 +1903,13 @@ IMPORTANT: As instances start their own threads, the module needs to be restarte
 <div class="sect4">
 <h5 id="API:Function:CSK_MultiTCPIPClient.setSelectedInstance"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setSelectedInstance()</span></h5>
 <div class="sect5">
-<h6 id="_short_description_13">Short description</h6>
+<h6 id="_short_description_28">Short description</h6>
 <div class="paragraph">
 <p>Select one of the multiple instances.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_parameters_5">Parameters</h6>
+<h6 id="_parameters_16">Parameters</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1244,10 +1936,268 @@ IMPORTANT: As instances start their own threads, the module needs to be restarte
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_11">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_26">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.setSelectedInstance(instance)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_MultiTCPIPClient.setServerAddress"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setServerAddress()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_29">Short description</h6>
+<div class="paragraph">
+<p>Set IP of TCP/IP server.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_17">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">address</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IP</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_27">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.setServerAddress(address)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_MultiTCPIPClient.setTrigger"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setTrigger()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_30">Short description</h6>
+<div class="paragraph">
+<p>Set trigger command for trigger/event pair via UI.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_18">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Trigger command</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_28">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.setTrigger(value)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_MultiTCPIPClient.setTxFraming"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">setTxFraming()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_31">Short description</h6>
+<div class="paragraph">
+<p>Set Tx frame of TCP/IP connection (only 'empty' or 'STX-ETX' supported). Will become active with next connection.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_19">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">frame</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ENUM<br>
+<a href="#API:Enum:CSK_MultiTCPIPClient.Communication_Frame">CSK_MultiTCPIPClient.Communication_Frame</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Frame to use.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_29">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.setTxFraming(frame)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_MultiTCPIPClient.startTCPIPClient"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">startTCPIPClient()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_32">Short description</h6>
+<div class="paragraph">
+<p>Start TCP/IP client.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_30">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.startTCPIPClient()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_MultiTCPIPClient.stopTCPIPClient"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">stopTCPIPClient()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_33">Short description</h6>
+<div class="paragraph">
+<p>Stop TCP/IP client.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_31">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.stopTCPIPClient()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_MultiTCPIPClient.transmitCommando"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">transmitCommando()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_34">Short description</h6>
+<div class="paragraph">
+<p>Transmit preset commando via TCP/IP (used in module UI). See also "setCommand".</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_32">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">CSK_MultiTCPIPClient.transmitCommando()</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Function:CSK_MultiTCPIPClient.transmitDataNUM"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-function">transmitDataNUM()</span></h5>
+<div class="sect5">
+<h6 id="_short_description_35">Short description</h6>
+<div class="paragraph">
+<p>Example of dynamically served function to transmit data on specific instance.<br>
+NUM will be replaced by the number of instance (e.g. "transmitData1").<br>
+INFO: Other modules can check via "Script.isServedAsFunction" if function of sepecific instance exists.<br>
+Needs then to be called via "Script.callFunction".</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_parameters_20">Parameters</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Data to transmit.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_return_values_3">Return values</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">numberOfBytesTransmitted</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of bytes transmitted ('0' if error).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_33">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua">numberOfBytesTransmitted = CSK_MultiTCPIPClient.transmitDataNUM(data)</code></pre>
 </div>
 </div>
 </div>
@@ -1258,13 +2208,13 @@ IMPORTANT: As instances start their own threads, the module needs to be restarte
 <div class="sect4">
 <h5 id="API:Event:CSK_MultiTCPIPClient.OnDataLoadedOnReboot"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnDataLoadedOnReboot</span></h5>
 <div class="sect5">
-<h6 id="_short_description_14">Short description</h6>
+<h6 id="_short_description_36">Short description</h6>
 <div class="paragraph">
 <p>Event to call if module tried to load parameters and should be ready.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_12">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_34">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnDataLoadedOnReboot</span>()
@@ -1277,15 +2227,257 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </div>
 </div>
 <div class="sect4">
+<h5 id="API:Event:CSK_MultiTCPIPClient.OnNewCommand"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewCommand</span></h5>
+<div class="sect5">
+<h6 id="_short_description_37">Short description</h6>
+<div class="paragraph">
+<p>Notify command to send.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cmd</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Command to transmit.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_35">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewCommand</span>(cmd)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_MultiTCPIPClient.OnNewCommand</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewCommand</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_MultiTCPIPClient.OnNewConnectionStatus"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewConnectionStatus</span></h5>
+<div class="sect5">
+<h6 id="_short_description_38">Short description</h6>
+<div class="paragraph">
+<p>Notify configuration setup of TCP/IP connection status.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_2">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_36">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewConnectionStatus</span>(status)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_MultiTCPIPClient.OnNewConnectionStatus</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewConnectionStatus</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_MultiTCPIPClient.OnNewCurrentConnectionStatus"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewCurrentConnectionStatus</span></h5>
+<div class="sect5">
+<h6 id="_short_description_39">Short description</h6>
+<div class="paragraph">
+<p>Notify current status of TCP/IP connection.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_3">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">status</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Status</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_37">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewCurrentConnectionStatus</span>(status)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_MultiTCPIPClient.OnNewCurrentConnectionStatus</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewCurrentConnectionStatus</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_MultiTCPIPClient.OnNewDataNUM"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewDataNUM</span></h5>
+<div class="sect5">
+<h6 id="_short_description_40">Short description</h6>
+<div class="paragraph">
+<p>Example of dynamically created event to provide received data of instance.<br>
+NUM will be replaced by the number of instance (e.g. "OnNewData1").<br>
+INFO: Other modules can check via "Script.isServedAsEvent" if event of sepecific instance exists.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_4">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">data</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Data</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_38">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewDataNUM</span>(data)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_MultiTCPIPClient.OnNewDataNUM</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewDataNUM</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_MultiTCPIPClient.OnNewEventToForwardList"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewEventToForwardList</span></h5>
+<div class="sect5">
+<h6 id="_short_description_41">Short description</h6>
+<div class="paragraph">
+<p>Notify list of events to register to and to forward its content to TCP/IP server.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_5">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_39">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewEventToForwardList</span>(list)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_MultiTCPIPClient.OnNewEventToForwardList</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewEventToForwardList</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
 <h5 id="API:Event:CSK_MultiTCPIPClient.OnNewInstanceList"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewInstanceList</span></h5>
 <div class="sect5">
-<h6 id="_short_description_15">Short description</h6>
+<h6 id="_short_description_42">Short description</h6>
 <div class="paragraph">
 <p>Event to provide list of created instances.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments">Callback arguments</h6>
+<h6 id="_callback_arguments_6">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1312,7 +2504,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_13">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_40">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewInstanceList</span>(list)
@@ -1325,15 +2517,159 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </div>
 </div>
 <div class="sect4">
+<h5 id="API:Event:CSK_MultiTCPIPClient.OnNewInterface"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewInterface</span></h5>
+<div class="sect5">
+<h6 id="_short_description_43">Short description</h6>
+<div class="paragraph">
+<p>Notify selected interface for TCP/IP connection.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_7">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">interface</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Interface</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_41">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewInterface</span>(interface)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_MultiTCPIPClient.OnNewInterface</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewInterface</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_MultiTCPIPClient.OnNewInterfaceList"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewInterfaceList</span></h5>
+<div class="sect5">
+<h6 id="_short_description_44">Short description</h6>
+<div class="paragraph">
+<p>Notify list of available interfaces for TCP/IP connection.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_8">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List of interfaces.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_42">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewInterfaceList</span>(list)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_MultiTCPIPClient.OnNewInterfaceList</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewInterfaceList</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_MultiTCPIPClient.OnNewLog"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewLog</span></h5>
+<div class="sect5">
+<h6 id="_short_description_45">Short description</h6>
+<div class="paragraph">
+<p>Notfiy latest log.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_9">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">log</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Log entries.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_43">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewLog</span>(log)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_MultiTCPIPClient.OnNewLog</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewLog</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
 <h5 id="API:Event:CSK_MultiTCPIPClient.OnNewParameterName"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewParameterName</span></h5>
 <div class="sect5">
-<h6 id="_short_description_16">Short description</h6>
+<h6 id="_short_description_46">Short description</h6>
 <div class="paragraph">
 <p>Notify name of persistent data parameter.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_2">Callback arguments</h6>
+<h6 id="_callback_arguments_10">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1360,7 +2696,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_14">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_44">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewParameterName</span>(name)
@@ -1373,15 +2709,63 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </div>
 </div>
 <div class="sect4">
+<h5 id="API:Event:CSK_MultiTCPIPClient.OnNewPort"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewPort</span></h5>
+<div class="sect5">
+<h6 id="_short_description_47">Short description</h6>
+<div class="paragraph">
+<p>Notify port of TCP/IP connection.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_11">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">port</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">INT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Port</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_45">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewPort</span>(port)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_MultiTCPIPClient.OnNewPort</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewPort</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
 <h5 id="API:Event:CSK_MultiTCPIPClient.OnNewProcessingParameter"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewProcessingParameter</span></h5>
 <div class="sect5">
-<h6 id="_short_description_17">Short description</h6>
+<h6 id="_short_description_48">Short description</h6>
 <div class="paragraph">
 <p>Event to share processing parameters to the instances.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_3">Callback arguments</h6>
+<h6 id="_callback_arguments_12">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1413,23 +2797,23 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">value</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">AUTO</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">?</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Value of the parameter.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">internalObjectNo</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">INT</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">value2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AUTO</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">?</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">If parameter is for specifici internal used object, its number.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2nd value of the parameter.</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_15">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_46">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewProcessingParameter</span>(objectNo, parameter, value, internalObjectNo)
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewProcessingParameter</span>(objectNo, parameter, value, value2)
   <span class="comment">-- Do something</span>
 <span class="keyword">end</span>
 
@@ -1441,13 +2825,13 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_MultiTCPIPClient.OnNewResult"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewResult</span></h5>
 <div class="sect5">
-<h6 id="_short_description_18">Short description</h6>
+<h6 id="_short_description_49">Short description</h6>
 <div class="paragraph">
 <p>Generic event to notify results. E.g. to forward results from single instances.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_4">Callback arguments</h6>
+<h6 id="_callback_arguments_13">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1474,7 +2858,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_16">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_47">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewResult</span>(result)
@@ -1487,17 +2871,15 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </div>
 </div>
 <div class="sect4">
-<h5 id="API:Event:CSK_MultiTCPIPClient.OnNewResultNUM"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewResultNUM</span></h5>
+<h5 id="API:Event:CSK_MultiTCPIPClient.OnNewRxFrame"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewRxFrame</span></h5>
 <div class="sect5">
-<h6 id="_short_description_19">Short description</h6>
+<h6 id="_short_description_50">Short description</h6>
 <div class="paragraph">
-<p>Example of dynamically created event to provide result of instance.<br>
-NUM will be replaced by the number of instance (e.g. "OnNewResult1").<br>
-INFO: Other modules can check via "Script.isServedAsEvent" if event of sepecific instance exists.</p>
+<p>Notify RxFrame.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_5">Callback arguments</h6>
+<h6 id="_callback_arguments_14">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1515,23 +2897,23 @@ INFO: Other modules can check via "Script.isServedAsEvent" if event of sepecific
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">result</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">BOOL</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">frame</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Result</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">frame</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_17">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_48">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewResultNUM</span>(result)
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewRxFrame</span>(frame)
   <span class="comment">-- Do something</span>
 <span class="keyword">end</span>
 
-Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_MultiTCPIPClient.OnNewResultNUM</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewResultNUM</span><span class="delimiter">&quot;</span></span>)</code></pre>
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_MultiTCPIPClient.OnNewRxFrame</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewRxFrame</span><span class="delimiter">&quot;</span></span>)</code></pre>
 </div>
 </div>
 </div>
@@ -1539,13 +2921,13 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_MultiTCPIPClient.OnNewSelectedInstance"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewSelectedInstance</span></h5>
 <div class="sect5">
-<h6 id="_short_description_20">Short description</h6>
+<h6 id="_short_description_51">Short description</h6>
 <div class="paragraph">
 <p>Notify if new instance is selected.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_6">Callback arguments</h6>
+<h6 id="_callback_arguments_15">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1572,7 +2954,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_18">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_49">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewSelectedInstance</span>(selectedObject)
@@ -1585,15 +2967,63 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </div>
 </div>
 <div class="sect4">
+<h5 id="API:Event:CSK_MultiTCPIPClient.OnNewServerIP"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewServerIP</span></h5>
+<div class="sect5">
+<h6 id="_short_description_52">Short description</h6>
+<div class="paragraph">
+<p>Notify TCP/IP server IP.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_16">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">serverIP</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IP</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_50">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewServerIP</span>(serverIP)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_MultiTCPIPClient.OnNewServerIP</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewServerIP</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
 <h5 id="API:Event:CSK_MultiTCPIPClient.OnNewStatusLoadParameterOnReboot"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewStatusLoadParameterOnReboot</span></h5>
 <div class="sect5">
-<h6 id="_short_description_21">Short description</h6>
+<h6 id="_short_description_53">Short description</h6>
 <div class="paragraph">
 <p>Notify status if parameters should be loaded on app/device boot up.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_7">Callback arguments</h6>
+<h6 id="_callback_arguments_17">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1620,7 +3050,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_19">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_51">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusLoadParameterOnReboot</span>(status)
@@ -1635,13 +3065,13 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_MultiTCPIPClient.OnNewStatusRegisteredEvent"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewStatusRegisteredEvent</span></h5>
 <div class="sect5">
-<h6 id="_short_description_22">Short description</h6>
+<h6 id="_short_description_54">Short description</h6>
 <div class="paragraph">
 <p>Notify event instance is registered to receive data to process.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_8">Callback arguments</h6>
+<h6 id="_callback_arguments_18">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1668,7 +3098,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_20">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_52">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewStatusRegisteredEvent</span>(eventname)
@@ -1681,16 +3111,112 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </div>
 </div>
 <div class="sect4">
+<h5 id="API:Event:CSK_MultiTCPIPClient.OnNewTriggerEventPairList"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewTriggerEventPairList</span></h5>
+<div class="sect5">
+<h6 id="_short_description_55">Short description</h6>
+<div class="paragraph">
+<p>Notify list of trigger/event pairs.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_19">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_53">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewTriggerEventPairList</span>(list)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_MultiTCPIPClient.OnNewTriggerEventPairList</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewTriggerEventPairList</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="API:Event:CSK_MultiTCPIPClient.OnNewTxFrame"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewTxFrame</span></h5>
+<div class="sect5">
+<h6 id="_short_description_56">Short description</h6>
+<div class="paragraph">
+<p>Notify TxFrame.</p>
+</div>
+</div>
+<div class="sect5">
+<h6 id="_callback_arguments_20">Callback arguments</h6>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 12.5%;">
+<col style="width: 37.5%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Multiplicity</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">frame</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STRING</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">frame</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect5">
+<h6 id="_sample_auto_generated_54">Sample (auto-generated)</h6>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewTxFrame</span>(frame)
+  <span class="comment">-- Do something</span>
+<span class="keyword">end</span>
+
+Script.register(<span class="string"><span class="delimiter">&quot;</span><span class="content">CSK_MultiTCPIPClient.OnNewTxFrame</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">handleOnNewTxFrame</span><span class="delimiter">&quot;</span></span>)</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect4">
 <h5 id="API:Event:CSK_MultiTCPIPClient.OnNewValueToForwardNUM"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewValueToForwardNUM</span></h5>
 <div class="sect5">
-<h6 id="_short_description_23">Short description</h6>
+<h6 id="_short_description_57">Short description</h6>
 <div class="paragraph">
 <p>Example of dynamically created event to forward data from instance thread to Controller part of module, e.g. to forward values to UI.<br>
 NUM will be replaced by the number of instance (e.g. "OnNewResult1").<br></p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_9">Callback arguments</h6>
+<h6 id="_callback_arguments_21">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1723,7 +3249,7 @@ NUM will be replaced by the number of instance (e.g. "OnNewResult1").<br></p>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_21">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_55">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewValueToForwardNUM</span>(eventname, value)
@@ -1738,14 +3264,14 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_MultiTCPIPClient.OnNewValueUpdateNUM"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnNewValueUpdateNUM</span></h5>
 <div class="sect5">
-<h6 id="_short_description_24">Short description</h6>
+<h6 id="_short_description_58">Short description</h6>
 <div class="paragraph">
 <p>Example of dynamically created event to sync paramters between instance threads and Controller part of module.<br>
 NUM will be replaced by the number of instance (e.g. "OnNewResult1").<br></p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_10">Callback arguments</h6>
+<h6 id="_callback_arguments_22">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1790,7 +3316,7 @@ NUM will be replaced by the number of instance (e.g. "OnNewResult1").<br></p>
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_22">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_56">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnNewValueUpdateNUM</span>(instance, parameter, value, selectedObject)
@@ -1805,13 +3331,13 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_MultiTCPIPClient.OnPersistentDataModuleAvailable"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnPersistentDataModuleAvailable</span></h5>
 <div class="sect5">
-<h6 id="_short_description_25">Short description</h6>
+<h6 id="_short_description_59">Short description</h6>
 <div class="paragraph">
 <p>Notify status if features of CSK_PersistentData module are available.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_11">Callback arguments</h6>
+<h6 id="_callback_arguments_23">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1838,7 +3364,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_23">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_57">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnPersistentDataModuleAvailable</span>(status)
@@ -1853,13 +3379,13 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_MultiTCPIPClient.OnUserLevelAdminActive"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnUserLevelAdminActive</span></h5>
 <div class="sect5">
-<h6 id="_short_description_26">Short description</h6>
+<h6 id="_short_description_60">Short description</h6>
 <div class="paragraph">
 <p>Status of Admin userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_12">Callback arguments</h6>
+<h6 id="_callback_arguments_24">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1886,7 +3412,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_24">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_58">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelAdminActive</span>(status)
@@ -1901,13 +3427,13 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_MultiTCPIPClient.OnUserLevelMaintenanceActive"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnUserLevelMaintenanceActive</span></h5>
 <div class="sect5">
-<h6 id="_short_description_27">Short description</h6>
+<h6 id="_short_description_61">Short description</h6>
 <div class="paragraph">
 <p>Status of Maintenance userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_13">Callback arguments</h6>
+<h6 id="_callback_arguments_25">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1934,7 +3460,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_25">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_59">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelMaintenanceActive</span>(status)
@@ -1949,13 +3475,13 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_MultiTCPIPClient.OnUserLevelOperatorActive"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnUserLevelOperatorActive</span></h5>
 <div class="sect5">
-<h6 id="_short_description_28">Short description</h6>
+<h6 id="_short_description_62">Short description</h6>
 <div class="paragraph">
 <p>Status of Operator userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_14">Callback arguments</h6>
+<h6 id="_callback_arguments_26">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -1982,7 +3508,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_26">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_60">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelOperatorActive</span>(status)
@@ -1997,13 +3523,13 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 <div class="sect4">
 <h5 id="API:Event:CSK_MultiTCPIPClient.OnUserLevelServiceActive"><span class="breadcrumb">CSK_MultiTCPIPClient.</span><span class="api-event">OnUserLevelServiceActive</span></h5>
 <div class="sect5">
-<h6 id="_short_description_29">Short description</h6>
+<h6 id="_short_description_63">Short description</h6>
 <div class="paragraph">
 <p>Status of Service userlevel. Used internally in combination with the CSK_UserManagement module if available.</p>
 </div>
 </div>
 <div class="sect5">
-<h6 id="_callback_arguments_15">Callback arguments</h6>
+<h6 id="_callback_arguments_27">Callback arguments</h6>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
 <col style="width: 25%;">
@@ -2030,7 +3556,7 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </table>
 </div>
 <div class="sect5">
-<h6 id="_sample_auto_generated_27">Sample (auto-generated)</h6>
+<h6 id="_sample_auto_generated_61">Sample (auto-generated)</h6>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="lua"><span class="keyword">function</span> <span class="function">handleOnUserLevelServiceActive</span>(status)
@@ -2046,11 +3572,63 @@ Script.register(<span class="string"><span class="delimiter">&quot;</span><span 
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="_enumerations">Enumerations</h2>
+<div class="sectionbody">
+<div class="dlist">
+<dl>
+<dt class="hdlist1">C</dt>
+<dd>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="#API:Enum:CSK_MultiTCPIPClient.Communication_Frame">CSK_MultiTCPIPClient.Communication_Frame</a></p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="sect2">
+<h3 id="API:Enum:CSK_MultiTCPIPClient.Communication_Frame"><span class="api-enum">CSK_MultiTCPIPClient.Communication_Frame</span></h3>
+<div class="paragraph">
+<p>TCP/IP communication frame.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<caption class="title">Items</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Value</th>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="literal"><pre>empty</pre></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">empty</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No frame.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div class="literal"><pre>STX-ETX</pre></div></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STX_ETX</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">STX / ETX framing.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.1.0<br>
-Last updated 2024-02-13 12:43:14 +0100
+Version 1.0.0<br>
+Last updated 2024-02-13 14:46:11 +0100
 </div>
 </div>
 <script type="text/javascript">
