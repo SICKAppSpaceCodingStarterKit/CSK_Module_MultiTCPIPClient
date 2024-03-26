@@ -22,7 +22,7 @@ Script.serveEvent("CSK_MultiTCPIPClient.OnNewValueUpdate" .. multiTCPIPClientIns
 
 local tcpipHandle = TCPIPClient.create() -- Handle of TCPIP client
 
-local log = {} -- Log of TCPIP communication
+local log = {} -- Log of TCP/IP communication
 
 local processingParams = {}
 processingParams.activeInUI = false
@@ -153,33 +153,16 @@ end
 
 --- Function to create a new TCP/IP connection
 local function connect()
-
   updateSetup()
-
-  tcpipHandle:deregister('OnReceive', handleOnReceive)
-  tcpipHandle:deregister("OnDisconnected", handleOnDisconnected)
-  tcpipHandle:deregister("OnConnected", handleOnConnected)
-
-  tcpipHandle:register('OnReceive', handleOnReceive)
-  tcpipHandle:register("OnDisconnected", handleOnDisconnected)
-  tcpipHandle:register("OnConnected", handleOnConnected)
-
   tcpipHandle:connect()
-
 end
 
 --- Function to close the TCP/IP connection
 local function disconnect()
-
-  tcpipHandle:deregister('OnReceive', handleOnReceive)
-  tcpipHandle:deregister("OnDisconnected", handleOnDisconnected)
-  tcpipHandle:deregister("OnConnected", handleOnConnected)
-
-  --_G.logger:fine(nameOfModule .. ": Closing connection.")
   if processingParams.currentConnectionStatus then
     handleTransmitData('Closing connection.')
-    tcpipHandle:disconnect()
   end
+  tcpipHandle:disconnect()
 end
 
 --- Function to handle updates of processing parameters from Controller
@@ -253,3 +236,7 @@ local function handleOnNewProcessingParameter(multiTCPIPClientNo, parameter, val
   end
 end
 Script.register("CSK_MultiTCPIPClient.OnNewProcessingParameter", handleOnNewProcessingParameter)
+
+tcpipHandle:register('OnReceive', handleOnReceive)
+tcpipHandle:register("OnDisconnected", handleOnDisconnected)
+tcpipHandle:register("OnConnected", handleOnConnected)
