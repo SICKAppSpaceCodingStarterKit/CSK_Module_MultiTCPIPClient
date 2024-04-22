@@ -76,6 +76,14 @@ It is also possible to register on the 'CSK_MultiTCPIPClient.OnNewData[NUM]'-eve
                     <desc>Notify list of trigger/event pairs.</desc>
                     <param desc="List" multiplicity="1" name="list" type="string"/>
                 </event>
+                <event name="OnNewTriggerEventPairTrigger">
+                    <desc>Notify trigger of trigger/event pair.</desc>
+                    <param desc="List" multiplicity="1" name="list" type="string"/>
+                </event>
+                <event name="OnNewTriggerEventPairEvent">
+                    <desc>Notify event of trigger/event pairs.</desc>
+                    <param desc="List" multiplicity="1" name="list" type="string"/>
+                </event>
                 <event name="OnNewInterfaceList">
                     <desc>Notify list of available interfaces for TCP/IP connection.</desc>
                     <param desc="List of interfaces." multiplicity="1" name="list" type="string"/>
@@ -90,6 +98,10 @@ It is also possible to register on the 'CSK_MultiTCPIPClient.OnNewData[NUM]'-eve
                 </event>
                 <event name="OnNewEventToForwardList">
                     <desc>Notify list of events to register to and to forward its content to TCP/IP server.</desc>
+                    <param desc="List" multiplicity="1" name="list" type="string"/>
+                </event>
+                <event name="OnNewEventToForward">
+                    <desc>Notify event to register to and to forward its content to TCP/IP server.</desc>
                     <param desc="List" multiplicity="1" name="list" type="string"/>
                 </event>
                 <event name="OnNewStatusLoadParameterOnReboot">
@@ -212,7 +224,7 @@ NUM will be replaced by the number of instance (e.g. "OnNewResult1"). +</desc>
                 <function name="addTriggerEventPair">
                     <desc>Add a trigger command to wait for and the related event to call if the trigger command was received.</desc>
                     <param desc="Trigger to listen on TCP/IP connection." multiplicity="1" name="trigger" type="string"/>
-                    <param desc="Name of event to notify if trigger command was received. +&#10;Prefix 'TCPIPClient.' will be used in front of the string." multiplicity="1" name="event" type="string"/>
+                    <param desc="Name of event to notify if trigger command was received. +&#10;Prefix 'TCPIPClient.' will be used in front of the string. Name of event must differ over instances." multiplicity="1" name="event" type="string"/>
                 </function>
                 <function name="selectTriggerEventPairViaUI">
                     <desc>Select a trigger/event pair via UI.</desc>
@@ -239,7 +251,7 @@ NUM will be replaced by the number of instance (e.g. "OnNewResult1"). +</desc>
                     <param desc="Name of event to register to." multiplicity="1" name="event" type="string"/>
                 </function>
                 <function name="addEventToForwardViaUI">
-                    <desc>Add event to register to and forward content (first event parameter as string) to TCPI/IP server via UI (event needs to be prefilled on UI / via "setEventToForward").</desc>
+                    <desc>Add event to register to and forward content (first event parameter as string) to TCP/IP server via UI (event needs to be prefilled on UI / via "setEventToForward").</desc>
                 </function>
                 <function name="deleteEventToForward">
                     <desc>Remove event to forward content.</desc>

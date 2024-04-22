@@ -8,13 +8,21 @@ Module to provide TCP/IP client functionality on multiple instances.
 The app includes an intuitive GUI to setup the communication.  
 For further information check out the [documentation](https://raw.githack.com/SICKAppSpaceCodingStarterKit/CSK_Module_MultiTCPIPClient/main/docu/CSK_Module_MultiTCPIPClient.html) in the folder "docu".
 
+## Known issues
+
+In case of using the SICK AppEngine please keep in mind for selecting the ethernet interface, neither all selectable interfaces are available nor coincide with the name of the operating system.
+
 ## Information
 
 Tested on:
-|Device|Firmware|Module version
+|Device|Firmware|Module version|
 |--|--|--|
-|SIM1012|V2.3.0|V1.0.0|
-
+|SIM1012|v2.4.1|v1.0.0|
+|SIM1012|v2.3.0|v1.0.0|
+|SIM2000|v1.6.0|v1.0.0|
+|SICK AppEngine|v1.5.0|v1.0.0|
+|InspectorP631|v4.2.1|v1.0.0|
+|InspectorP631|v4.0.0|v1.0.0|
 
 This module is part of the SICK AppSpace Coding Starter Kit developing approach.  
 It is programmed in an object-oriented way. Some of the modules use kind of "classes" in Lua to make it possible to reuse code / classes in other projects.  

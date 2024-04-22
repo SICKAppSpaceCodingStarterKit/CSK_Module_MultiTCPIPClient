@@ -101,7 +101,7 @@ Script.serveFunction("CSK_MultiTCPIPClient.transmitData"..multiTCPIPClientInstan
 ---@param data binary The received data
 local function handleOnReceive(data)
 
-  _G.logger:fine(nameOfModule .. ": Received data on instance No. " .. multiTCPIPClientInstanceNumberString .. "= " .. data)
+  _G.logger:fine(nameOfModule .. ": Received data on instance No. " .. multiTCPIPClientInstanceNumberString .. " = " .. data)
 
   -- Forward data to other modules
   Script.notifyEvent("MultiTCPIPClient_OnNewData" .. multiTCPIPClientInstanceNumberString, data)
@@ -133,21 +133,22 @@ end
 --- Function to update the TCP/IP connection with new setup
 local function updateSetup()
 
-    tcpipHandle:setIPAddress(processingParams.serverIP)
-    tcpipHandle:setPort(processingParams.port)
-    if processingParams.rxFrame == 'STX-ETX' then
-      if processingParams.txFrame == 'STX-ETX' then
-        tcpipHandle:setFraming('\02','\03','\02','\03')
-      else
-        tcpipHandle:setFraming('\02','\03','','')
-      end
-    elseif processingParams.txFrame == 'STX-ETX' then
-        tcpipHandle:setFraming('','','\02','\03')
+  tcpipHandle:setIPAddress(processingParams.serverIP)
+  tcpipHandle:setPort(processingParams.port)
+  if processingParams.rxFrame == 'STX-ETX' then
+    if processingParams.txFrame == 'STX-ETX' then
+      tcpipHandle:setFraming('\02','\03','\02','\03')
     else
-        tcpipHandle:setFraming('','','','')
+      tcpipHandle:setFraming('\02','\03','','')
     end
+  elseif processingParams.txFrame == 'STX-ETX' then
+      tcpipHandle:setFraming('','','\02','\03')
+  else
+      tcpipHandle:setFraming('','','','')
+  end
 
-    tcpipHandle:setInterface(processingParams.interface)
+  tcpipHandle:setInterface(processingParams.interface)
+  sendLog()
 
 end
 

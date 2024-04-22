@@ -17,7 +17,7 @@ local tmrMultiTCPIPClient = Timer.create()
 tmrMultiTCPIPClient:setExpirationTime(300)
 tmrMultiTCPIPClient:setPeriodic(false)
 
-local triggerValue, eventValue -- Selected trigger command + eventName for trigger/event pair via UI
+local triggerValue, eventValue = '', '' -- Selected trigger command + eventName for trigger/event pair via UI
 local selectedTrigger = '' -- Selected trigger/event pair
 
 local eventToForward = '' -- Preset event name to add via UI (see 'addEventToForwardViaUI')
@@ -52,7 +52,10 @@ Script.serveEvent("CSK_MultiTCPIPClient.OnNewCurrentConnectionStatus", "MultiTCP
 Script.serveEvent("CSK_MultiTCPIPClient.OnNewCommand", "MultiTCPIPClient_OnNewCommand")
 Script.serveEvent("CSK_MultiTCPIPClient.OnNewLog", "MultiTCPIPClient_OnNewLog")
 Script.serveEvent("CSK_MultiTCPIPClient.OnNewTriggerEventPairList", "MultiTCPIPClient_OnNewTriggerEventPairList")
+Script.serveEvent("CSK_MultiTCPIPClient.OnNewTriggerEventPairTrigger", "MultiTCPIPClient_OnNewTriggerEventPairTrigger")
+Script.serveEvent("CSK_MultiTCPIPClient.OnNewTriggerEventPairEvent", "MultiTCPIPClient_OnNewTriggerEventPairEvent")
 Script.serveEvent("CSK_MultiTCPIPClient.OnNewEventToForwardList", "MultiTCPIPClient_OnNewEventToForwardList")
+Script.serveEvent("CSK_MultiTCPIPClient.OnNewEventToForward", "MultiTCPIPClient_OnNewEventToForward")
 
 Script.serveEvent("CSK_MultiTCPIPClient.OnNewStatusLoadParameterOnReboot", "MultiTCPIPClient_OnNewStatusLoadParameterOnReboot")
 Script.serveEvent("CSK_MultiTCPIPClient.OnPersistentDataModuleAvailable", "MultiTCPIPClient_OnPersistentDataModuleAvailable")
@@ -188,9 +191,14 @@ local function handleOnExpiredTmrMultiTCPIPClient()
   Script.notifyEvent("MultiTCPIPClient_OnPersistentDataModuleAvailable", multiTCPIPClient_Instances[selectedInstance].persistentModuleAvailable)
   Script.notifyEvent("MultiTCPIPClient_OnNewParameterName", multiTCPIPClient_Instances[selectedInstance].parametersName)
 
-  Script.notifyEvent("MultiTCPIPClient_OnNewLog", '')
   Script.notifyEvent("MultiTCPIPClient_OnNewTriggerEventPairList", multiTCPIPClient_Instances[selectedInstance].helperFuncs.createSpecificJsonList('commandList', multiTCPIPClient_Instances[selectedInstance].parameters.commandList))
+  Script.notifyEvent("MultiTCPIPClient_OnNewTriggerEventPairTrigger", '')
+  triggerValue = ''
+  Script.notifyEvent("MultiTCPIPClient_OnNewTriggerEventPairEvent", '')
+  eventValue = ''
   Script.notifyEvent("MultiTCPIPClient_OnNewEventToForwardList", multiTCPIPClient_Instances[selectedInstance].helperFuncs.createSpecificJsonList('eventToForward', multiTCPIPClient_Instances[selectedInstance].parameters.forwardEvents))
+  Script.notifyEvent("MultiTCPIPClient_OnNewEventToForward", '')
+  eventToForward = ''
 
   Script.notifyEvent("MultiTCPIPClient_OnNewStatusLoadParameterOnReboot", multiTCPIPClient_Instances[selectedInstance].parameterLoadOnReboot)
   Script.notifyEvent("MultiTCPIPClient_OnPersistentDataModuleAvailable", multiTCPIPClient_Instances[selectedInstance].persistentModuleAvailable)
@@ -266,6 +274,10 @@ local function selectEventToForwardViaUI(selection)
         selectedEventToForward = ''
       else
         _G.logger:fine(nameOfModule .. ": Selected EventToForward: " .. tostring(selectedEventToForward))
+        if ( selectedEventToForward ~= "-" ) then
+          eventToForward = selectedEventToForward
+          Script.notifyEvent("MultiTCPIPClient_OnNewEventToForward", eventToForward)
+        end
       end
     end
   end
@@ -273,9 +285,13 @@ end
 Script.serveFunction("CSK_MultiTCPIPClient.selectEventToForwardViaUI", selectEventToForwardViaUI)
 
 local function addEventToForward(event)
-  multiTCPIPClient_Instances[selectedInstance].parameters.forwardEvents[event] = event
-  Script.notifyEvent('MultiTCPIPClient_OnNewProcessingParameter', selectedInstance, 'addEvent', event)
-  Script.notifyEvent("MultiTCPIPClient_OnNewEventToForwardList", multiTCPIPClient_Instances[selectedInstance].helperFuncs.createSpecificJsonList('eventToForward', multiTCPIPClient_Instances[selectedInstance].parameters.forwardEvents))
+  if ( event == '' ) then
+    _G.logger:warning(nameOfModule .. ": EventToForward cannot be added. Is empty")
+  else
+    multiTCPIPClient_Instances[selectedInstance].parameters.forwardEvents[event] = event
+    Script.notifyEvent('MultiTCPIPClient_OnNewProcessingParameter', selectedInstance, 'addEvent', event)
+    Script.notifyEvent("MultiTCPIPClient_OnNewEventToForwardList", multiTCPIPClient_Instances[selectedInstance].helperFuncs.createSpecificJsonList('eventToForward', multiTCPIPClient_Instances[selectedInstance].parameters.forwardEvents))
+  end
 end
 Script.serveFunction("CSK_MultiTCPIPClient.addEventToForward", addEventToForward)
 
@@ -308,21 +324,27 @@ local function selectTriggerEventPairViaUI(selection)
 
   if selection == "" then
     selectedTrigger = ''
-    _G.logger:warning(nameOfModule .. ": Did not find TriggerCommand")
+    _G.logger:warning(nameOfModule .. ": Did not find TriggerCommand. Is empty")
   else
     local _, pos = string.find(selection, '"TriggerCommand":"')
     if pos == nil then
-      _G.logger:warning(nameOfModule .. ": Did not find TriggerCommand")
+      _G.logger:warning(nameOfModule .. ": Did not find TriggerCommand. Is nil")
       selectedTrigger = ''
     else
       pos = tonumber(pos)
       local endPos = string.find(selection, '"', pos+1)
       selectedTrigger = string.sub(selection, pos+1, endPos-1)
-      if selectedTrigger == nil then
-        _G.logger:warning(nameOfModule .. ": Did not find TriggerCommand")
+      if ( selectedTrigger == nil or selectedTrigger == "" ) then
+        _G.logger:warning(nameOfModule .. ": Did not find TriggerCommand. Is empty or nil")
         selectedTrigger = ''
       else
         _G.logger:fine(nameOfModule .. ": Selected TriggerCommand: " .. tostring(selectedTrigger))
+        if ( selectedTrigger ~= "-" ) then
+          triggerValue = selectedTrigger
+          eventValue = multiTCPIPClient_Instances[selectedInstance].parameters.commandList[selectedTrigger]
+          Script.notifyEvent("MultiTCPIPClient_OnNewTriggerEventPairTrigger", triggerValue)
+          Script.notifyEvent("MultiTCPIPClient_OnNewTriggerEventPairEvent", eventValue)
+        end
       end
     end
   end
@@ -330,9 +352,15 @@ end
 Script.serveFunction("CSK_MultiTCPIPClient.selectTriggerEventPairViaUI", selectTriggerEventPairViaUI)
 
 local function addTriggerEventPair(trigger, event)
-  multiTCPIPClient_Instances[selectedInstance].parameters.commandList[trigger] = event
-  Script.notifyEvent('MultiTCPIPClient_OnNewProcessingParameter', selectedInstance, 'addTrigger', trigger, event)
-  Script.notifyEvent("MultiTCPIPClient_OnNewTriggerEventPairList", multiTCPIPClient_Instances[selectedInstance].helperFuncs.createSpecificJsonList('commandList', multiTCPIPClient_Instances[selectedInstance].parameters.commandList))
+  if ( trigger == '' ) then
+    _G.logger:warning(nameOfModule .. ": TriggerCommand cannot be added. Trigger is empty")
+  elseif ( event == '' ) then
+    _G.logger:warning(nameOfModule .. ": TriggerCommand cannot be added. Event is empty")
+  else
+    multiTCPIPClient_Instances[selectedInstance].parameters.commandList[trigger] = event
+    Script.notifyEvent('MultiTCPIPClient_OnNewProcessingParameter', selectedInstance, 'addTrigger', trigger, event)
+    Script.notifyEvent("MultiTCPIPClient_OnNewTriggerEventPairList", multiTCPIPClient_Instances[selectedInstance].helperFuncs.createSpecificJsonList('commandList', multiTCPIPClient_Instances[selectedInstance].parameters.commandList))
+  end
 end
 Script.serveFunction("CSK_MultiTCPIPClient.addTriggerEventPair", addTriggerEventPair)
 

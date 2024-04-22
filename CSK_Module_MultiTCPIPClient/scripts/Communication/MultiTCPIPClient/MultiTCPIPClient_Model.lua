@@ -58,7 +58,7 @@ function multiTCPIPClient.create(multiTCPIPClientInstanceNo)
   self.parameters.connectionStatus = false -- Configure module to try to connect to server
 
   -- List of incoming trigger commands to forward as events
-  -- e.g. "commandList['TRG'] = 'OnNewTrigger' will trigger the event "CSK_TCPIPClient.OnNewTrigger" if receiving 'TRG' via TCPIP connection
+  -- e.g. "commandList['TRG'] = 'OnNewTrigger' will trigger the event "CSK_TCPIPClient.OnNewTrigger" if receiving 'TRG' via TCP/IP connection
   self.parameters.commandList = {}
 
   -- List of events to register to and forward content to TCP/IP server
