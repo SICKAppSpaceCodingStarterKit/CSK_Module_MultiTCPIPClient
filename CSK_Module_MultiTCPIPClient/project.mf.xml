@@ -102,7 +102,7 @@ It is also possible to register on the 'CSK_MultiTCPIPClient.OnNewData[NUM]'-eve
                 </event>
                 <event name="OnNewEventToForward">
                     <desc>Notify event to register to and to forward its content to TCP/IP server.</desc>
-                    <param desc="List" multiplicity="1" name="list" type="string"/>
+                    <param desc="Name of event" multiplicity="1" name="eventName" type="string"/>
                 </event>
                 <event name="OnNewStatusLoadParameterOnReboot">
                     <desc>Notify status if parameters should be loaded on app/device boot up.</desc>

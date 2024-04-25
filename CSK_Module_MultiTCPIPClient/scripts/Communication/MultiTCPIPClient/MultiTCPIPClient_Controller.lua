@@ -217,11 +217,15 @@ end
 Script.serveFunction("CSK_MultiTCPIPClient.pageCalled", pageCalled)
 
 local function setSelectedInstance(instance)
-  selectedInstance = instance
-  _G.logger:fine(nameOfModule .. ": New selected instance = " .. tostring(selectedInstance))
-  multiTCPIPClient_Instances[selectedInstance].activeInUI = true
-  Script.notifyEvent('MultiTCPIPClient_OnNewProcessingParameter', selectedInstance, 'activeInUI', true)
-  tmrMultiTCPIPClient:start()
+  if #multiTCPIPClient_Instances >= instance then
+    selectedInstance = instance
+    _G.logger:fine(nameOfModule .. ": New selected instance = " .. tostring(selectedInstance))
+    multiTCPIPClient_Instances[selectedInstance].activeInUI = true
+    Script.notifyEvent('MultiTCPIPClient_OnNewProcessingParameter', selectedInstance, 'activeInUI', true)
+    tmrMultiTCPIPClient:start()
+  else
+    _G.logger:warning(nameOfModule .. ": Selected instance does not exist.")
+  end
 end
 Script.serveFunction("CSK_MultiTCPIPClient.setSelectedInstance", setSelectedInstance)
 
@@ -286,7 +290,7 @@ Script.serveFunction("CSK_MultiTCPIPClient.selectEventToForwardViaUI", selectEve
 
 local function addEventToForward(event)
   if ( event == '' ) then
-    _G.logger:warning(nameOfModule .. ": EventToForward cannot be added. Is empty")
+    _G.logger:info(nameOfModule .. ": EventToForward cannot be added. Is empty")
   else
     multiTCPIPClient_Instances[selectedInstance].parameters.forwardEvents[event] = event
     Script.notifyEvent('MultiTCPIPClient_OnNewProcessingParameter', selectedInstance, 'addEvent', event)
@@ -324,18 +328,18 @@ local function selectTriggerEventPairViaUI(selection)
 
   if selection == "" then
     selectedTrigger = ''
-    _G.logger:warning(nameOfModule .. ": Did not find TriggerCommand. Is empty")
+    _G.logger:info(nameOfModule .. ": Did not find TriggerCommand. Is empty")
   else
     local _, pos = string.find(selection, '"TriggerCommand":"')
     if pos == nil then
-      _G.logger:warning(nameOfModule .. ": Did not find TriggerCommand. Is nil")
+      _G.logger:info(nameOfModule .. ": Did not find TriggerCommand. Is nil")
       selectedTrigger = ''
     else
       pos = tonumber(pos)
       local endPos = string.find(selection, '"', pos+1)
       selectedTrigger = string.sub(selection, pos+1, endPos-1)
       if ( selectedTrigger == nil or selectedTrigger == "" ) then
-        _G.logger:warning(nameOfModule .. ": Did not find TriggerCommand. Is empty or nil")
+        _G.logger:info(nameOfModule .. ": Did not find TriggerCommand. Is empty or nil")
         selectedTrigger = ''
       else
         _G.logger:fine(nameOfModule .. ": Selected TriggerCommand: " .. tostring(selectedTrigger))
@@ -353,9 +357,9 @@ Script.serveFunction("CSK_MultiTCPIPClient.selectTriggerEventPairViaUI", selectT
 
 local function addTriggerEventPair(trigger, event)
   if ( trigger == '' ) then
-    _G.logger:warning(nameOfModule .. ": TriggerCommand cannot be added. Trigger is empty")
+    _G.logger:info(nameOfModule .. ": TriggerCommand cannot be added. Trigger is empty")
   elseif ( event == '' ) then
-    _G.logger:warning(nameOfModule .. ": TriggerCommand cannot be added. Event is empty")
+    _G.logger:info(nameOfModule .. ": TriggerCommand cannot be added. Event is empty")
   else
     multiTCPIPClient_Instances[selectedInstance].parameters.commandList[trigger] = event
     Script.notifyEvent('MultiTCPIPClient_OnNewProcessingParameter', selectedInstance, 'addTrigger', trigger, event)
