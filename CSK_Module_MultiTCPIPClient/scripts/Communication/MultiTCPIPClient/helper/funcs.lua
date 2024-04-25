@@ -111,6 +111,39 @@ local function createContentList(data)
 end
 funcs.createContentList = createContentList
 
+
+--- Function to create a JSON string out of a table content
+---@param list string Type of list
+---@param content string[] Lua Table with entries for list
+---@return string jsonstring List created of table entries
+local function createSpecificJsonList(list, content)
+  local commandList = {}
+  if content == nil then
+    commandList = {{TriggerCommand = '-', notifyEvent = '-'},}
+  else
+    local size = 0
+      for key, value in pairs(content) do
+        if list == 'commandList' then
+          table.insert(commandList, {TriggerCommand = key, notifyEvent = 'CSK_MultiTCPIPClient.' .. value})
+        elseif list == 'eventToForward' then
+          table.insert(commandList, {EventToForward = key})
+        end
+        size = size + 1
+      end
+      if size == 0 then
+        if list == 'commandList' then
+          commandList = {{TriggerCommand = '-', notifyEvent = '-'},}
+        elseif list == 'eventToForward' then
+          commandList = {{EventToForward = '-'},}
+        end
+      end
+  end
+
+  local jsonstring = funcs.json.encode(commandList)
+  return jsonstring
+end
+funcs.createSpecificJsonList = createSpecificJsonList
+
 --- Function to get content list as JSON string
 ---@param data string[] Table with data entries
 ---@return string sortedTable Sorted entries as JSON string

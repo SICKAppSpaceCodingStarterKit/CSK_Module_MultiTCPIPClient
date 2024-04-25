@@ -1,8 +1,256 @@
 <layout-row id="RowLayout1">
-	<layout-column id="ColumnLayout1" style="align-items:stretch">
-		<davinci-value-display id="VD_Info"
-			label="Place your custom features here...">
+	<layout-column id="ColumnLayout1"
+		class="myCustomFrame_CSK_Module_MultiTCPIPClient"
+		style="align-items: stretch">
+		<davinci-value-display id="VD_TCPIPClient" label="TCP/IP Client">
 		</davinci-value-display>
+		<layout-row id="RowLayout145"
+			style="justify-content: space-between; align-items: center">
+			<davinci-value-display id="VD_ActivateTCPIP"
+				value="Activate TCP/IP Connection">
+			</davinci-value-display>
+			<davinci-toggle-switch id="TS_Activate">
+				<crown-binding event="change"
+					name="CSK_MultiTCPIPClient/setConnectionStatus"
+					path="param/args/status" auto-commit>
+				</crown-binding>
+				<crown-edpws-binding property="checked"
+					name="CSK_MultiTCPIPClient/OnNewConnectionStatus" update-on-resume>
+				</crown-edpws-binding>
+			</davinci-toggle-switch>
+		</layout-row>
+		<layout-row id="RowLayout55"
+			style="justify-content: space-between; align-items: center">
+			<davinci-value-display id="VD_ConnectionStatus"
+				value="Connection status:">
+			</davinci-value-display>
+			<davinci-status-indicator id="SI_ConnectionStatus">
+				<span></span>
+				<crown-edpws-binding property="status"
+					name="CSK_MultiTCPIPClient/OnNewCurrentConnectionStatus"
+					update-on-resume>
+				</crown-edpws-binding>
+			</davinci-status-indicator>
+		</layout-row>
+		<layout-row id="RowLayout29" style="justify-content: space-between">
+			<layout-column id="ColumnLayout36" style="align-items: stretch">
+				<davinci-text-field id="TF_ServerIP" type="text"
+					label="Server IP-Address -> Port">
+					<crown-edpws-binding property="value"
+						name="CSK_MultiTCPIPClient/OnNewServerIP" update-on-resume>
+					</crown-edpws-binding>
+					<crown-binding event="change" name="CSK_MultiTCPIPClient/setServerAddress"
+						path="param/args/address" auto-commit>
+					</crown-binding>
+					<crown-edpws-binding property="readonly"
+						name="CSK_MultiTCPIPClient/OnNewCurrentConnectionStatus"
+						update-on-resume>
+					</crown-edpws-binding>
+				</davinci-text-field>
+			</layout-column>
+			<layout-column id="ColumnLayout13" style="align-items: stretch">
+				<davinci-numeric-field id="NF_Port" type="outline" min="0"
+					max="+Infinity" ticks="1" group-separator=","
+					decimal-separator="." format-pattern="0" title="Port">
+					<crown-edpws-binding property="value" name="CSK_MultiTCPIPClient/OnNewPort"
+						update-on-resume>
+					</crown-edpws-binding>
+					<crown-binding event="change" name="CSK_MultiTCPIPClient/setPort"
+						path="param/args/port" auto-commit>
+					</crown-binding>
+					<crown-edpws-binding property="disabled"
+						name="CSK_MultiTCPIPClient/OnNewCurrentConnectionStatus"
+						update-on-resume>
+					</crown-edpws-binding>
+				</davinci-numeric-field>
+			</layout-column>
+			<layout-column id="ColumnLayout16" style="align-items: stretch">
+				<davinci-drop-down id="DD_Interface">
+					<crown-edpws-binding property="data"
+						name="CSK_MultiTCPIPClient/OnNewInterfaceList" update-on-resume
+						converter="convertToList">
+					</crown-edpws-binding>
+					<crown-edpws-binding property="value"
+						name="CSK_MultiTCPIPClient/OnNewInterface" update-on-resume>
+					</crown-edpws-binding>
+					<crown-binding event="change" name="CSK_MultiTCPIPClient/setInterface"
+						path="param/args/interface" auto-commit>
+					</crown-binding>
+					<crown-edpws-binding property="disabled"
+						name="CSK_MultiTCPIPClient/OnNewCurrentConnectionStatus"
+						update-on-resume>
+					</crown-edpws-binding>
+				</davinci-drop-down>
+			</layout-column>
+		</layout-row>
+		<layout-row id="RowLayout67">
+			<layout-column id="ColumnLayout57" style="align-items: stretch">
+				<davinci-value-display id="VD_RxFrame" value="RxFraming">
+				</davinci-value-display>
+				<davinci-drop-down id="DD_rxFrame">
+					<davinci-option id="Option1" value="STX-ETX">
+						<span>STX-ETX</span>
+					</davinci-option>
+					<davinci-option id="Option2" value="empty">
+						<span>empty</span>
+					</davinci-option>
+					<crown-edpws-binding property="value"
+						name="CSK_MultiTCPIPClient/OnNewRxFrame" update-on-resume>
+					</crown-edpws-binding>
+					<crown-binding event="change" name="CSK_MultiTCPIPClient/setRxFraming"
+						path="param/args/frame" auto-commit>
+					</crown-binding>
+					<crown-edpws-binding property="disabled"
+						name="CSK_MultiTCPIPClient/OnNewCurrentConnectionStatus"
+						update-on-resume>
+					</crown-edpws-binding>
+				</davinci-drop-down>
+			</layout-column>
+			<layout-column id="ColumnLayout94" style="align-items: stretch">
+				<davinci-value-display id="VD_TxFrame" value="TxFraming">
+				</davinci-value-display>
+				<davinci-drop-down id="DD_TxFrame">
+					<davinci-option id="Option3" value="STX-ETX">
+						<span>STX-ETX</span>
+					</davinci-option>
+					<davinci-option id="Option4" value="empty">
+						<span>empty</span>
+					</davinci-option>
+					<crown-edpws-binding property="value"
+						name="CSK_MultiTCPIPClient/OnNewTxFrame" update-on-resume>
+					</crown-edpws-binding>
+					<crown-binding event="change" name="CSK_MultiTCPIPClient/setTxFraming"
+						path="param/args/frame" auto-commit>
+					</crown-binding>
+					<crown-edpws-binding property="disabled"
+						name="CSK_MultiTCPIPClient/OnNewCurrentConnectionStatus"
+						update-on-resume>
+					</crown-edpws-binding>
+				</davinci-drop-down>
+			</layout-column>
+		</layout-row>
+		<layout-row id="RowLayout82" style="justify-content: space-between">
+			<layout-column id="ColumnLayout112"
+				style="align-items: stretch; flex-grow: 3">
+				<davinci-text-field id="TF_Command" type="text" label="Command">
+					<crown-edpws-binding property="value"
+						name="CSK_MultiTCPIPClient/OnNewCommand" update-on-resume>
+					</crown-edpws-binding>
+					<crown-binding event="change" name="CSK_MultiTCPIPClient/setCommand"
+						path="param/args/cmd" auto-commit>
+					</crown-binding>
+				</davinci-text-field>
+			</layout-column>
+			<layout-column id="ColumnLayout12" style="align-items: stretch">
+				<davinci-button id="B_Transmit" type="primary" icon-position="append">
+					<span>Transmit</span>
+					<crown-set event="submit"
+						crown-function="CSK_MultiTCPIPClient/transmitCommando"
+						protocol="crownMSGPACK">
+					</crown-set>
+					<crown-edpws-binding property="disabled"
+						name="CSK_MultiTCPIPClient/OnNewCurrentConnectionStatus"
+						update-on-resume converter="function(value) {return !value;}">
+					</crown-edpws-binding>
+				</davinci-button>
+			</layout-column>
+		</layout-row>
+		<layout-column id="ColumnLayout65"
+			class="myCustomMinHeight200px_CSK_Module_MultiTCPIPClient"
+			style="align-self: stretch; align-items: stretch">
+			<layout-row id="RowLayout76"
+				style="align-items: stretch; align-self: stretch">
+				<davinci-text-area id="TA_MessageLog" label="Message Log:"
+					style="width: 100%">
+					<crown-edpws-binding property="value"
+						name="CSK_MultiTCPIPClient/OnNewLog" update-on-resume>
+					</crown-edpws-binding>
+				</davinci-text-area>
+			</layout-row>
+		</layout-column>
+		<layout-row id="RowLayout9">
+			<layout-column id="Column_PersistentData"
+				class="myCustomFrame_CSK_Module_MultiTCPIPClient"
+				style="align-items: stretch">
+				<layout-row id="RowLayout4"
+					style="justify-content: space-between; align-items: center">
+					<layout-column id="ColumnLayout5" style="align-items: stretch">
+						<davinci-value-display id="VD_ParameterName" value="Parameter name:"
+							title="Name of the parameters within the CSK_PersistentData module to be uses for this module.">
+						</davinci-value-display>
+					</layout-column>
+					<layout-column id="ColumnLayout6" style="align-items: stretch">
+						<davinci-text-field id="TF_ParameterName" type="text"
+							title="Name of the parameters within the CSK_PersistentData module to be uses for this module.">
+							<crown-edpws-binding property="value"
+								name="CSK_MultiTCPIPClient/OnNewParameterName" update-on-resume>
+							</crown-edpws-binding>
+							<crown-binding event="change"
+								name="CSK_MultiTCPIPClient/setParameterName"
+								path="param/args/name" auto-commit>
+							</crown-binding>
+							<crown-edpws-binding property="disabled"
+								name="CSK_MultiTCPIPClient/OnPersistentDataModuleAvailable"
+								update-on-resume converter="function(value) {return !value;}">
+							</crown-edpws-binding>
+						</davinci-text-field>
+					</layout-column>
+				</layout-row>
+				<layout-row id="RowLayout2"
+					style="justify-content: space-between; align-items: center">
+					<davinci-value-display id="VD_LoadConfig"
+						value="Load config on app start:"
+						title="Load configured parameters from CSK_PersistentData on app start.">
+					</davinci-value-display>
+					<davinci-checkbox id="CB_LoadConfig"
+						title="Load configured parameters from CSK_PersistentData on app start.">
+						<span></span>
+						<crown-edpws-binding property="checked"
+							name="CSK_MultiTCPIPClient/OnNewStatusLoadParameterOnReboot"
+							update-on-resume>
+						</crown-edpws-binding>
+						<crown-edpws-binding property="disabled"
+							name="CSK_MultiTCPIPClient/OnPersistentDataModuleAvailable"
+							update-on-resume converter="function(value) {return !value;}">
+						</crown-edpws-binding>
+						<crown-binding event="change"
+							name="CSK_MultiTCPIPClient/setLoadOnReboot"
+							path="param/args/status" auto-commit>
+						</crown-binding>
+					</davinci-checkbox>
+				</layout-row>
+				<layout-row id="RowLayout3">
+					<layout-column id="ColumnLayout3" style="align-items: stretch">
+						<davinci-button id="B_LoadConfig" type="primary"
+							icon-position="append"
+							title="Load configured parameters from CSK_PersistentData module.">
+							<span>Load Config</span>
+							<crown-binding event="submit"
+								name="CSK_MultiTCPIPClient/loadParameters" auto-commit>
+							</crown-binding>
+							<crown-edpws-binding property="disabled"
+								name="CSK_MultiTCPIPClient/OnPersistentDataModuleAvailable"
+								update-on-resume converter="function(value) {return !value;}">
+							</crown-edpws-binding>
+						</davinci-button>
+					</layout-column>
+					<layout-column id="ColumnLayout4" style="align-items: stretch">
+						<davinci-button id="B_SaveConfig" type="primary"
+							icon-position="append"
+							title="Save current configured parameters of this module within CSK_PersistentData module.">
+							<span>Save Config</span>
+							<crown-binding event="submit"
+								name="CSK_MultiTCPIPClient/sendParameters" auto-commit>
+							</crown-binding>
+							<crown-edpws-binding property="disabled"
+								name="CSK_MultiTCPIPClient/OnPersistentDataModuleAvailable"
+								update-on-resume converter="function(value) {return !value;}">
+							</crown-edpws-binding>
+						</davinci-button>
+					</layout-column>
+				</layout-row>
+			</layout-column>
+		</layout-row>
 	</layout-column>
 	<layout-column id="ColumnLayout2" style="align-items: stretch">
 		<stacked-view id="SV_UserRole">
@@ -13,7 +261,7 @@
 							<davinci-tab id="Tab_Settings" label="Setup">
 								<layout-row id="RowLayout8">
 									<layout-column id="ColumnLayout9" style="align-items: stretch">
-										<layout-row id="RowLayout11"
+										<layout-row id="RowLayout611"
 											style="justify-content: space-between; align-items: center">
 											<layout-column id="ColumnLayout33" style="align-items: stretch">
 												<davinci-value-display id="VD_SelectInstance"
@@ -38,105 +286,154 @@
 												</davinci-drop-down>
 											</layout-column>
 										</layout-row>
-										<layout-row id="RowLayout10" style="align-items: center">
-											<layout-column id="ColumnLayout10" style="align-items: stretch">
-												<davinci-value-display id="VD_RegisteredEvent"
-													value="Registered event:">
-												</davinci-value-display>
-											</layout-column>
-											<layout-column id="ColumnLayout11" style="align-items: stretch">
-												<davinci-text-field id="TF_RegisteredEvent" type="text"
-													placeholder="e.g. CSK_ImagePlayer.OnNewImage">
-												<crown-edpws-binding property="value"
-													name="CSK_MultiTCPIPClient/OnNewStatusRegisteredEvent" update-on-resume>
-												</crown-edpws-binding>
-												<crown-binding event="change" name="CSK_MultiTCPIPClient/setRegisterEvent"
-													path="param/args/event" auto-commit>
-												</crown-binding>
-												</davinci-text-field>
-											</layout-column>
-										</layout-row>
-										<layout-row id="RowLayout9">
-											<layout-column id="Column_PersistentData"
-												class="myCustomFrame_CSK_Module_MultiTCPIPClient"
-												style="align-items: stretch">
-												<layout-row id="RowLayout4"
-													style="justify-content: space-between; align-items: center">
-												<layout-column id="ColumnLayout5" style="align-items: stretch">
-												<davinci-value-display id="VD_ParameterName" value="Parameter name:"
-													title="Name of the parameters within the CSK_PersistentData module to be uses for this module.">
-												</davinci-value-display>
-												</layout-column>
-												<layout-column id="ColumnLayout6" style="align-items: stretch">
-												<davinci-text-field id="TF_ParameterName" type="text"
-													title="Name of the parameters within the CSK_PersistentData module to be uses for this module.">
-												<crown-edpws-binding property="value"
-													name="CSK_MultiTCPIPClient/OnNewParameterName" update-on-resume>
-												</crown-edpws-binding>
-												<crown-binding event="change" name="CSK_MultiTCPIPClient/setParameterName"
-													path="param/args/name" auto-commit>
-												</crown-binding>
-												<crown-edpws-binding property="disabled"
-													name="CSK_MultiTCPIPClient/OnPersistentDataModuleAvailable"
-													update-on-resume converter="function(value) {return !value;}">
-												</crown-edpws-binding>
-												</davinci-text-field>
-												</layout-column>
+										<davinci-tabs id="Tabs_SubSetup"
+											class="myCustomFrame_CSK_Module_MultiTCPIPClient" type="classic"
+											style="align-self: stretch">
+											<davinci-tab id="Tab_TriggerCommand" label="Commands">
+												<layout-row id="RowLayout13">
+													<layout-column id="ColumnLayout14" style="align-items: stretch">
+														<layout-row id="RowLayout14">
+															<davinci-collapse id="Collapse1" collapsed-title="Additional info"
+																expanded-title="Hide">
+																<layout-column id="ColumnLayout10" style="align-items: stretch">
+																	<davinci-callout id="Callout14" type="info">
+																		<span>
+																		List of command - event pairs. If defined commands are received via TCP/IP communication, related events are notified.
+																		</span>
+																	</davinci-callout>
+																	<davinci-callout id="Callout3" type="info">
+																		<span>
+																		Trigger Command + parameters need to be separated by a ',' (e.g. 'TriggerCmd,data1,data2,data3'). All parameters will be forwarded as one single string after the first ','.
+																		</span>
+																	</davinci-callout>
+																	<davinci-callout id="Callout2" type="info">
+																		<span>
+																		Events will be served with prefix 'CSK_MultiTCPIPClient.', e.g. 'OnNewData' will result in 'CSK_MultiTCPIPClient.OnNewData'. Events must differ over the instances.
+																		</span>
+																	</davinci-callout>
+																</layout-column>
+															</davinci-collapse>
+														</layout-row>
+														<curie-table id="DT_TriggerCommandList" selectable
+															select-mode="highlight_row">
+															<curie-table-column id="TriggerCommand" header="TriggerCommand">
+															</curie-table-column>
+															<curie-table-column id="notifyEvent" header="notifyEvent">
+															</curie-table-column>
+															<crown-edpws-binding property="data"
+																name="CSK_MultiTCPIPClient/OnNewTriggerEventPairList"
+																update-on-resume>
+															</crown-edpws-binding>
+															<crown-binding event="row-selected"
+																name="CSK_MultiTCPIPClient/selectTriggerEventPairViaUI"
+																path="param/args/selection" auto-commit>
+															</crown-binding>
+														</curie-table>
+														<layout-row id="RowLayout11"
+															class="myCustomFrame_CSK_Module_MultiTCPIPClient">
+															<layout-column id="ColumnLayout15" style="align-items: stretch">
+																<layout-row id="RowLayout10"
+																	style="align-items: center; justify-content: space-between">
+																	<davinci-text-field id="TF_TriggerCommand" type="text"
+																		label="Trigger command:"
+																		title="Wait for this command on TCP/IP communication to trigger an event, see other field">
+																		<crown-edpws-binding property="value"
+																			name="CSK_MultiTCPIPClient/OnNewTriggerEventPairTrigger"
+																			update-on-resume>
+																		</crown-edpws-binding>
+																		<crown-binding event="change" name="CSK_MultiTCPIPClient/setTrigger"
+																			path="param/args/value" auto-commit>
+																		</crown-binding>
+																	</davinci-text-field>
+																	<davinci-value-display id="VD_ForwardTo" value="-->">
+																	</davinci-value-display>
+																	<davinci-text-field id="TF_EventToCall" type="text" label="Call event"
+																		title="Trigger this event if defined command was received via TCP/IP communication.">
+																		<crown-edpws-binding property="value"
+																			name="CSK_MultiTCPIPClient/OnNewTriggerEventPairEvent"
+																			update-on-resume>
+																		</crown-edpws-binding>
+																		<crown-binding event="change"
+																			name="CSK_MultiTCPIPClient/setEventValue" path="param/args/value"
+																			auto-commit>
+																		</crown-binding>
+																	</davinci-text-field>
+																</layout-row>
+																<layout-row id="RowLayout12" style="justify-content: space-between">
+																	<davinci-button id="B_AddEventTriggerPair" type="primary"
+																		icon-position="append" style="align-self: stretch; width: 100%">
+																		<span>ADD</span>
+																		<crown-binding event="submit"
+																			name="CSK_MultiTCPIPClient/addTriggerEventPairViaUI" auto-commit>
+																		</crown-binding>
+																	</davinci-button>
+																	<davinci-button id="B_DeleteEventTriggerPair" type="primary"
+																		icon-position="append" style="align-self: stretch; width: 100%">
+																		<span>DELETE</span>
+																		<crown-binding event="submit"
+																			name="CSK_MultiTCPIPClient/deleteTriggerEventPairViaUI"
+																			auto-commit>
+																		</crown-binding>
+																	</davinci-button>
+																</layout-row>
+															</layout-column>
+														</layout-row>
+													</layout-column>
 												</layout-row>
-												<layout-row id="RowLayout2"
-													style="justify-content: space-between; align-items: center">
-												<davinci-value-display id="VD_LoadConfig"
-													value="Load config on app start:"
-													title="Load configured parameters from CSK_PersistentData on app start.">
-												</davinci-value-display>
-												<davinci-checkbox id="CB_LoadConfig"
-													title="Load configured parameters from CSK_PersistentData on app start.">
-												<span></span>
-												<crown-edpws-binding property="checked"
-													name="CSK_MultiTCPIPClient/OnNewStatusLoadParameterOnReboot"
-													update-on-resume>
-												</crown-edpws-binding>
-												<crown-edpws-binding property="disabled"
-													name="CSK_MultiTCPIPClient/OnPersistentDataModuleAvailable"
-													update-on-resume converter="function(value) {return !value;}">
-												</crown-edpws-binding>
-												<crown-binding event="change" name="CSK_MultiTCPIPClient/setLoadOnReboot"
-													path="param/args/status" auto-commit>
-												</crown-binding>
-												</davinci-checkbox>
+											</davinci-tab>
+											<davinci-tab id="Tab_Events" label="ForwardEvents">
+												<layout-row id="RowLayout16">
+													<layout-column id="ColumnLayout18" style="align-items: stretch">
+														<curie-table id="DT_EventToForward" selectable
+															select-mode="highlight_row">
+															<curie-table-column id="EventToForward" header="EventToForward">
+															</curie-table-column>
+															<crown-edpws-binding property="data"
+																name="CSK_MultiTCPIPClient/OnNewEventToForwardList"
+																update-on-resume>
+															</crown-edpws-binding>
+															<crown-binding event="row-selected"
+																name="CSK_MultiTCPIPClient/selectEventToForwardViaUI"
+																path="param/args/selection" auto-commit>
+															</crown-binding>
+														</curie-table>
+														<layout-row id="RowLayout15"
+															class="myCustomFrame_CSK_Module_MultiTCPIPClient">
+															<layout-column id="ColumnLayout17" style="align-items: stretch">
+																<davinci-text-field id="TF_EventToForward" type="text"
+																	label="Event to register:"
+																	title="Register to this event to forward its content to TCP/IP server.">
+																	<crown-edpws-binding property="value"
+																		name="CSK_MultiTCPIPClient/OnNewEventToForward"
+																		update-on-resume>
+																	</crown-edpws-binding>
+																	<crown-binding event="change"
+																		name="CSK_MultiTCPIPClient/setEventToForward"
+																		path="param/args/value" auto-commit>
+																	</crown-binding>
+																</davinci-text-field>
+																<layout-row id="RowLayout17" style="justify-content: space-between">
+																	<davinci-button id="B_AddEventToForward" type="primary"
+																		icon-position="append" style="width: 100%">
+																		<span>ADD</span>
+																		<crown-binding event="submit"
+																			name="CSK_MultiTCPIPClient/addEventToForwardViaUI" auto-commit>
+																		</crown-binding>
+																	</davinci-button>
+																	<davinci-button id="B_DeleteEventToForward" type="primary"
+																		icon-position="append" style="width: 100%">
+																		<span>DELETE</span>
+																		<crown-binding event="submit"
+																			name="CSK_MultiTCPIPClient/deleteEventToForwardViaUI" auto-commit>
+																		</crown-binding>
+																	</davinci-button>
+																</layout-row>
+															</layout-column>
+														</layout-row>
+													</layout-column>
 												</layout-row>
-												<layout-row id="RowLayout3">
-												<layout-column id="ColumnLayout3" style="align-items: stretch">
-												<davinci-button id="B_LoadConfig" type="primary"
-													icon-position="append"
-													title="Load configured parameters from CSK_PersistentData module.">
-												<span>Load Config</span>
-												<crown-binding event="submit" name="CSK_MultiTCPIPClient/loadParameters"
-													auto-commit>
-												</crown-binding>
-												<crown-edpws-binding property="disabled"
-													name="CSK_MultiTCPIPClient/OnPersistentDataModuleAvailable"
-													update-on-resume converter="function(value) {return !value;}">
-												</crown-edpws-binding>
-												</davinci-button>
-												</layout-column>
-												<layout-column id="ColumnLayout4" style="align-items: stretch">
-												<davinci-button id="B_SaveConfig" type="primary"
-													icon-position="append"
-													title="Save current configured parameters of this module within CSK_PersistentData module.">
-												<span>Save Config</span>
-												<crown-binding event="submit" name="CSK_MultiTCPIPClient/sendParameters"
-													auto-commit>
-												</crown-binding>
-												<crown-edpws-binding property="disabled"
-													name="CSK_MultiTCPIPClient/OnPersistentDataModuleAvailable"
-													update-on-resume converter="function(value) {return !value;}">
-												</crown-edpws-binding>
-												</davinci-button>
-												</layout-column>
-												</layout-row>
-											</layout-column>
-										</layout-row>
+											</davinci-tab>
+										</davinci-tabs>
 									</layout-column>
 								</layout-row>
 							</davinci-tab>
@@ -183,5 +480,6 @@
 			</crown-binding>
 		</stacked-view>
 	</layout-column>
-  
+	<layout-column id="ColumnLayout11" style="align-items: stretch">
+	</layout-column>
 </layout-row>
