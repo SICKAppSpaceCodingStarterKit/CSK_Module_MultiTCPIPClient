@@ -220,12 +220,12 @@ local function handleOnNewProcessingParameter(multiTCPIPClientNo, parameter, val
 
     elseif parameter == 'clearAll' then
       for forwardEvent in pairs(processingParams.forwardEvents) do
-        processingParams.forwardEvents[value] = nil
+        processingParams.forwardEvents[forwardEvent] = nil
         Script.deregister(forwardEvent, handleTransmitData)
       end
 
       for trigger, event in pairs(processingParams.commandList) do
-        processingParams.commandList[value] = nil
+        processingParams.commandList[trigger] = nil
       end
 
     else

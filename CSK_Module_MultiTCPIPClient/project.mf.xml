@@ -17,7 +17,7 @@ Typically the features of this module are used like this (check also main script
 - Set port via 'setPort'. +
 - Set interface via 'setInterface'. +
 - Set framing via 'setRxFraming' and 'setTxFraming'. +
-- Connect to server via 'startTCPIPClient'. +
+- Connect to server via 'setConnectionStatus'. +
 {empty} + 
 **2) Forward content via TCP/IP, also by other modules** +
 To send content via TCP/IP, there are different possibilities. +
@@ -178,12 +178,22 @@ NUM will be replaced by the number of instance (e.g. "OnNewResult1"). +</desc>
                     <desc>Notify event instance is registered to receive data to process.</desc>
                     <param desc="Name of event." multiplicity="1" name="eventname" type="string"/>
                 </event>
-                <function name="startTCPIPClient">
-                    <desc>Start TCP/IP client.</desc>
-                </function>
-                <function name="stopTCPIPClient">
-                    <desc>Stop TCP/IP client.</desc>
-                </function>
+                <event name="OnNewStatusFlowConfigPriority">
+                    <desc>Notify if FlowConfig should have priority for FlowConfig relevant configurations.</desc>
+                    <param desc="Status" multiplicity="1" name="status" type="bool"/>
+                </event>
+                <event name="OnNewStatusCSKStyle">
+                    <desc>Notify UI style to use for CSK modules.</desc>
+                    <param desc="UI style" multiplicity="1" name="theme" type="string"/>
+                </event>
+                <event name="OnNewStatusModuleVersion">
+                    <desc>Notify version of module.</desc>
+                    <param desc="Version" multiplicity="1" name="version" type="string"/>
+                </event>
+                <event name="OnNewStatusModuleIsActive">
+                    <desc>Notify if module can be used on device.</desc>
+                    <param desc="Status" multiplicity="1" name="status" type="bool"/>
+                </event>
                 <function name="setServerAddress">
                     <desc>Set IP of TCP/IP server.</desc>
                     <param desc="IP" multiplicity="1" name="address" type="string"/>
@@ -270,9 +280,7 @@ NUM will be replaced by the number of instance (e.g. "OnNewResult1"). +</desc>
                 </function>
                 <function name="sendParameters">
                     <desc>Send parameters to CSK_PersistentData module if possible to save them.</desc>
-                </function>
-                <function name="loadParameters">
-                    <desc>Load parameters for this module from the CSK_PersistentData module if possible and use them.</desc>
+                    <param desc="[Optional] Set to TRUE if the data should NOT be saved immediately after sending." multiplicity="?" name="noDataSave" type="bool"/>
                 </function>
                 <function name="setLoadOnReboot">
                     <desc>Configure if this module should load its saved parameters at app/ device boot up.</desc>
@@ -305,10 +313,85 @@ Needs then to be called via "Script.callFunction".</desc>
                     <desc>Function to reset instances to one single instance. +
 IMPORTANT: As instances start their own threads, the module needs to be restarted if new instances are needed... (see AppEngine docu for "Script.startScript").</desc>
                 </function>
+                <function name="setFlowConfigPriority">
+                    <desc>Function to configure if FlowConfig should have priority for FlowConfig relevant configuration.</desc>
+                    <param desc="Status" multiplicity="1" name="status" type="bool"/>
+                </function>
+                <function name="clearFlowConfigRelevantConfiguration">
+                    <desc>Function to clear FlowConfig relevant configurations.</desc>
+                </function>
+                <function name="getStatusModuleActive">
+                    <desc>Function to get status if module is active.</desc>
+                    <return desc="Status" multiplicity="1" name="status" type="bool"/>
+                </function>
+                <function name="loadParameters">
+                    <desc>Load parameters for this module from the CSK_PersistentData module if possible and use them.</desc>
+                    <return desc="Success to load parameters." multiplicity="1" name="success" type="bool"/>
+                </function>
+                <function name="getParameters">
+                    <trait>released</trait>
+                    <desc>Function to get all parameters of the client in JSON format.</desc>
+                    <param desc="Number of instance to get parameters from." multiplicity="1" name="instanceNo" type="int"/>
+                    <return desc="JSON string with all parameters." multiplicity="1" name="jsonParameters" type="string"/>
+                </function>
+                <function name="resetModule">
+                    <desc>Function to reset main configuration of module.</desc>
+                </function>
             </serves>
         </crown>
+        <crown name="MultiTCPIPClient_FC">
+            <trait>released</trait>
+            <desc>Crown to provide CSK_FlowConfig relevant features.</desc>
+            <serves/>
+            <crown name="Transmit">
+                <desc>Set source of incoming data to forward via TCP/IP.</desc>
+                <serves>
+                    <function name="create">
+                        <desc>Internally used CSK_FlowConfig create function.</desc>
+                        <param desc="Numeric identifier of processing instance (must be &gt;=1)." multiplicity="1" name="Instance" type="int"/>
+                        <return desc="Handle to internally used FlowConfig instance." multiplicity="1" name="handle" type="handle"/>
+                    </function>
+                    <function name="transmit">
+                        <include>data-flow</include>
+                        <desc>Set source of incoming data to forward via TCP/IP.</desc>
+                        <param desc="Handle to internally used FlowConfig instance." multiplicity="1" name="handle" type="handle"/>
+                        <param desc="Source1 of data to forward via TCP/IP.&#10;&#10;Parameter:&#10;1: Data content (STRING)" multiplicity="?" name="source1" type="string"/>
+                        <param desc="Source2 of data to forward via TCP/IP.&#10;&#10;Parameter:&#10;1: Data content (STRING)" multiplicity="?" name="source2" type="string"/>
+                        <param desc="Source3 of data to forward via TCP/IP.&#10;&#10;Parameter:&#10;1: Data content (STRING)" multiplicity="?" name="source3" type="string"/>
+                        <param desc="Source4 of data to forward via TCP/IP.&#10;&#10;Parameter:&#10;1: Data content (STRING)" multiplicity="?" name="source4" type="string"/>
+                    </function>
+                </serves>
+            </crown>
+            <crown name="OnReceive">
+                <trait>released</trait>
+                <desc>Provide received TCP/IP data.</desc>
+                <serves>
+                    <event name="OnNewData">
+                        <include>data-flow</include>
+                        <desc>Provide received TCP/IP data.</desc>
+                        <param desc="Handle to internally used FlowConfig instance." multiplicity="1" name="handle" type="handle"/>
+                        <param desc="'CSK_MultiTCPIPClient.OnNewData[InstanceNUM]' or 'CSK_MultiTCPIPClient.OnNewTrigger[InstanceNUM]_[COMMAND]'&#10;&#10;Parameter:&#10;1: Data content (STRING)" multiplicity="1" name="OnNewData" ref="MultiColorSelection_FC.ResultType" type="string"/>
+                    </event>
+                    <function name="create">
+                        <trait>released</trait>
+                        <desc>Internally used CSK_FlowConfig create function.</desc>
+                        <param desc="Numeric identifier of processing instance (must be &gt;=1)." multiplicity="1" name="Instance" type="int"/>
+                        <param desc="Optional trigger command (will filter incoming data for messages starting with this command)." multiplicity="?" name="Command" type="string"/>
+                        <return desc="Handle to internally used FlowConfig instance." multiplicity="1" name="handle" type="handle"/>
+                    </function>
+                    <function name="register">
+                        <trait>released</trait>
+                        <desc>Internally used CSK_FlowConfig register function.</desc>
+                        <param desc="Handle to internally used FlowConfig instance." multiplicity="1" name="handle" type="handle"/>
+                        <param desc="Internal parameter (not used)." multiplicity="1" name="eventname" type="string"/>
+                        <param desc="Internally used callback function." multiplicity="1" name="callback" type="string"/>
+                        <return desc="Success of register process." multiplicity="1" name="success" type="bool"/>
+                    </function>
+                </serves>
+            </crown>
+        </crown>
         <meta key="author">SICK AG</meta>
-        <meta key="version">1.0.0</meta>
+        <meta key="version">2.0.0</meta>
         <meta key="priority">low</meta>
         <meta key="copy-protected">false</meta>
         <meta key="read-protected">false</meta>
