@@ -71,7 +71,11 @@ local function create(instance, command)
     local handle = Container.create()
     instanceTable[fullInstanceName] = fullInstanceName
     Container.add(handle, 'Instance', instance)
-    Container.add(handle, 'Command', command)
+    if command then
+      Container.add(handle, 'Command', command)
+    else
+      Container.add(handle, 'Command', '')
+    end
     Container.add(handle, "CB_Function", "")
     return handle
   end

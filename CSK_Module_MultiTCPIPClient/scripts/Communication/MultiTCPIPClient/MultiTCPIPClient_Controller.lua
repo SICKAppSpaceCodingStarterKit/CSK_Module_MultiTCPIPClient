@@ -179,7 +179,7 @@ end
 --- Function to send all relevant values to UI on resume
 local function handleOnExpiredTmrMultiTCPIPClient()
 
-  Script.notifyEvent("MultiTCPIPClient_OnNewStatusModuleVersion", multiTCPIPClient_Model.version)
+  Script.notifyEvent("MultiTCPIPClient_OnNewStatusModuleVersion", 'v' .. multiTCPIPClient_Model.version)
   Script.notifyEvent("MultiTCPIPClient_OnNewStatusCSKStyle", multiTCPIPClient_Model.styleForUI)
   Script.notifyEvent("MultiTCPIPClient_OnNewStatusModuleIsActive", _G.availableAPIs.default and _G.availableAPIs.specific)
 
@@ -244,7 +244,11 @@ end
 Script.serveFunction("CSK_MultiTCPIPClient.setSelectedInstance", setSelectedInstance)
 
 local function getInstancesAmount ()
-  return #multiTCPIPClient_Instances
+  if multiTCPIPClient_Instances then
+    return #multiTCPIPClient_Instances
+  else
+    return 0
+  end
 end
 Script.serveFunction("CSK_MultiTCPIPClient.getInstancesAmount", getInstancesAmount)
 

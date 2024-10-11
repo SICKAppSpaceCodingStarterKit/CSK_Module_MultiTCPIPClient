@@ -348,7 +348,7 @@ IMPORTANT: As instances start their own threads, the module needs to be restarte
                 <serves>
                     <function name="create">
                         <desc>Internally used CSK_FlowConfig create function.</desc>
-                        <param desc="Numeric identifier of processing instance (must be &gt;=1)." multiplicity="1" name="Instance" type="int"/>
+                        <param constraint="1-99" desc="Numeric identifier of processing instance." multiplicity="1" name="Instance" type="int"/>
                         <return desc="Handle to internally used FlowConfig instance." multiplicity="1" name="handle" type="handle"/>
                     </function>
                     <function name="transmit">
@@ -375,7 +375,7 @@ IMPORTANT: As instances start their own threads, the module needs to be restarte
                     <function name="create">
                         <trait>released</trait>
                         <desc>Internally used CSK_FlowConfig create function.</desc>
-                        <param desc="Numeric identifier of processing instance (must be &gt;=1)." multiplicity="1" name="Instance" type="int"/>
+                        <param constraint="1-99" desc="Numeric identifier of processing instance." multiplicity="1" name="Instance" type="int"/>
                         <param desc="Optional trigger command (will filter incoming data for messages starting with this command)." multiplicity="?" name="Command" type="string"/>
                         <return desc="Handle to internally used FlowConfig instance." multiplicity="1" name="handle" type="handle"/>
                     </function>
