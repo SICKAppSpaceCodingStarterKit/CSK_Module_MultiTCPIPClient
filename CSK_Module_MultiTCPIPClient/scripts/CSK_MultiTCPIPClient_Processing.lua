@@ -42,6 +42,9 @@ processingParams.forwardEvents = {}
 
 --- Function to notify latest log messages, e.g. to show on UI
 local function sendLog()
+  if #log == 100 then
+    table.remove(log, 100)
+  end
   local tempLog = ''
   for i=1, #log do
     tempLog = tempLog .. tostring(log[i]) .. '\n'
@@ -79,9 +82,7 @@ local function handleTransmitData(data)
     numberOfBytesTransmitted = tcpipHandle:transmit(tostring(data))
 
     table.insert(log, 1, DateTime.getTime() .. ' - SENT = ' .. tostring(data))
-    if #log == 100 then
-      table.remove(log, 100)
-    end
+
     sendLog()
 
     if numberOfBytesTransmitted == 0 then
@@ -95,7 +96,7 @@ local function handleTransmitData(data)
 
   return numberOfBytesTransmitted
 end
-Script.serveFunction("CSK_MultiTCPIPClient.transmitData"..multiTCPIPClientInstanceNumberString, handleTransmitData, 'string', 'int:1')
+Script.serveFunction("CSK_MultiTCPIPClient.transmitData"..multiTCPIPClientInstanceNumberString, handleTransmitData, 'string:?', 'int:1')
 
 --- Function to receive incoming TCP/IP data
 ---@param data binary The received data
@@ -107,9 +108,7 @@ local function handleOnReceive(data)
   Script.notifyEvent("MultiTCPIPClient_OnNewData" .. multiTCPIPClientInstanceNumberString, data)
 
   table.insert(log, 1, DateTime.getTime() .. ' - RECV = ' .. tostring(data))
-  if #log == 100 then
-    table.remove(log, 100)
-  end
+
   sendLog()
 
   -- Check if cmd includes parameters seperated by a ','
@@ -121,7 +120,6 @@ local function handleOnReceive(data)
     if processingParams.commandList[cmd] then
       Script.notifyEvent("MultiTCPIPClient_" .. processingParams.commandList[cmd], string.sub(data, pos + 1))
     end
-
   else
     -- Check for command without parameter
     if processingParams.commandList[data] then
@@ -148,6 +146,7 @@ local function updateSetup()
   end
 
   tcpipHandle:setInterface(processingParams.interface)
+
   sendLog()
 
 end
@@ -193,15 +192,19 @@ local function handleOnNewProcessingParameter(multiTCPIPClientNo, parameter, val
       if processingParams.forwardEvents[value] then
         Script.deregister(processingParams.forwardEvents[value], handleTransmitData)
       end
-      processingParams.forwardEvents[value] = value
+      --separate local function for this event to avoid handleTransmitData dumped in garbage collection
+      local function localHandleTransmitData(data)
+        handleTransmitData(data)
+      end
+      processingParams.forwardEvents[value] = localHandleTransmitData
 
-      local suc = Script.register(value, handleTransmitData)
+      local suc = Script.register(value, localHandleTransmitData)
       _G.logger:fine(nameOfModule .. ": Added event to forward content = " .. value .. " on instance No. " .. multiTCPIPClientInstanceNumberString)
       _G.logger:fine(nameOfModule .. ": Success to register to event = " .. tostring(suc) .. " on instance No. " .. multiTCPIPClientInstanceNumberString)
 
     elseif parameter == 'removeEvent' then
+      local suc = Script.deregister(value, processingParams.forwardEvents[value])
       processingParams.forwardEvents[value] = nil
-      local suc = Script.deregister(value, handleTransmitData)
       _G.logger:fine(nameOfModule .. ": Deleted event = " .. tostring(value) .. " on instance No. " .. multiTCPIPClientInstanceNumberString)
       _G.logger:fine(nameOfModule .. ": Success to deregister of event = " .. tostring(suc) .. " on instance No. " .. multiTCPIPClientInstanceNumberString)
 
@@ -220,8 +223,8 @@ local function handleOnNewProcessingParameter(multiTCPIPClientNo, parameter, val
 
     elseif parameter == 'clearAll' then
       for forwardEvent in pairs(processingParams.forwardEvents) do
+        Script.deregister(forwardEvent, processingParams.forwardEvents[forwardEvent])
         processingParams.forwardEvents[forwardEvent] = nil
-        Script.deregister(forwardEvent, handleTransmitData)
       end
 
       for trigger, event in pairs(processingParams.commandList) do

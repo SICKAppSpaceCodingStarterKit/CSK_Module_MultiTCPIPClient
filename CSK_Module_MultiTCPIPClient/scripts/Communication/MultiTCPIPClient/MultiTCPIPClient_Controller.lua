@@ -383,6 +383,7 @@ end
 Script.serveFunction("CSK_MultiTCPIPClient.addTriggerEventPair", addTriggerEventPair)
 
 local function deleteTriggerEventPair(trigger)
+  Script.notifyEvent('MultiTCPIPClient_OnNewProcessingParameter', selectedInstance, 'removeTrigger', trigger)
   multiTCPIPClient_Instances[selectedInstance].parameters.commandList[trigger] = nil
   Script.notifyEvent("MultiTCPIPClient_OnNewTriggerEventPairList", multiTCPIPClient_Instances[selectedInstance].helperFuncs.createSpecificJsonList('commandList', multiTCPIPClient_Instances[selectedInstance].parameters.commandList))
 end
