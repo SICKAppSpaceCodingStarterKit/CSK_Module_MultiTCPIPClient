@@ -41,6 +41,11 @@ Script.serveEvent("CSK_MultiTCPIPClient.OnNewValueUpdateNUM", "MultiTCPIPClient_
 
 -- Real events
 --------------------------------------------------
+
+Script.serveEvent('CSK_MultiTCPIPClient.OnNewStatusModuleVersion', 'MultiTCPIPClient_OnNewStatusModuleVersion')
+Script.serveEvent('CSK_MultiTCPIPClient.OnNewStatusCSKStyle', 'MultiTCPIPClient_OnNewStatusCSKStyle')
+Script.serveEvent('CSK_MultiTCPIPClient.OnNewStatusModuleIsActive', 'MultiTCPIPClient_OnNewStatusModuleIsActive')
+
 Script.serveEvent("CSK_MultiTCPIPClient.OnNewConnectionStatus", "MultiTCPIPClient_OnNewConnectionStatus")
 Script.serveEvent("CSK_MultiTCPIPClient.OnNewInterfaceList", "MultiTCPIPClient_OnNewInterfaceList")
 Script.serveEvent("CSK_MultiTCPIPClient.OnNewInterface", "MultiTCPIPClient_OnNewInterface")
@@ -60,6 +65,7 @@ Script.serveEvent("CSK_MultiTCPIPClient.OnNewEventToForward", "MultiTCPIPClient_
 Script.serveEvent("CSK_MultiTCPIPClient.OnNewStatusLoadParameterOnReboot", "MultiTCPIPClient_OnNewStatusLoadParameterOnReboot")
 Script.serveEvent("CSK_MultiTCPIPClient.OnPersistentDataModuleAvailable", "MultiTCPIPClient_OnPersistentDataModuleAvailable")
 Script.serveEvent("CSK_MultiTCPIPClient.OnNewParameterName", "MultiTCPIPClient_OnNewParameterName")
+Script.serveEvent('CSK_MultiTCPIPClient.OnNewStatusFlowConfigPriority', 'MultiTCPIPClient_OnNewStatusFlowConfigPriority')
 
 Script.serveEvent("CSK_MultiTCPIPClient.OnNewInstanceList", "MultiTCPIPClient_OnNewInstanceList")
 Script.serveEvent("CSK_MultiTCPIPClient.OnNewProcessingParameter", "MultiTCPIPClient_OnNewProcessingParameter")
@@ -173,44 +179,52 @@ end
 --- Function to send all relevant values to UI on resume
 local function handleOnExpiredTmrMultiTCPIPClient()
 
-  updateUserLevel()
+  Script.notifyEvent("MultiTCPIPClient_OnNewStatusModuleVersion", 'v' .. multiTCPIPClient_Model.version)
+  Script.notifyEvent("MultiTCPIPClient_OnNewStatusCSKStyle", multiTCPIPClient_Model.styleForUI)
+  Script.notifyEvent("MultiTCPIPClient_OnNewStatusModuleIsActive", _G.availableAPIs.default and _G.availableAPIs.specific)
 
-  Script.notifyEvent('MultiTCPIPClient_OnNewSelectedInstance', selectedInstance)
-  Script.notifyEvent("MultiTCPIPClient_OnNewInstanceList", helperFuncs.createStringListBySize(#multiTCPIPClient_Instances))
+  if _G.availableAPIs.default and _G.availableAPIs.specific then
 
-  Script.notifyEvent("MultiTCPIPClient_OnNewConnectionStatus", multiTCPIPClient_Instances[selectedInstance].parameters.connectionStatus)
-  Script.notifyEvent("MultiTCPIPClient_OnNewInterfaceList", multiTCPIPClient_Instances[selectedInstance].interfaceList)
-  Script.notifyEvent("MultiTCPIPClient_OnNewInterface", multiTCPIPClient_Instances[selectedInstance].parameters.interface)
-  Script.notifyEvent("MultiTCPIPClient_OnNewServerIP", multiTCPIPClient_Instances[selectedInstance].parameters.serverIP)
-  Script.notifyEvent("MultiTCPIPClient_OnNewPort", multiTCPIPClient_Instances[selectedInstance].parameters.port)
-  Script.notifyEvent("MultiTCPIPClient_OnNewRxFrame", multiTCPIPClient_Instances[selectedInstance].parameters.rxFrame)
-  Script.notifyEvent("MultiTCPIPClient_OnNewTxFrame", multiTCPIPClient_Instances[selectedInstance].parameters.txFrame)
-  Script.notifyEvent("MultiTCPIPClient_OnNewCurrentConnectionStatus", multiTCPIPClient_Instances[selectedInstance].currentConnectionStatus)
-  Script.notifyEvent("MultiTCPIPClient_OnNewCommand", multiTCPIPClient_Instances[selectedInstance].command)
-  Script.notifyEvent("MultiTCPIPClient_OnNewStatusLoadParameterOnReboot", multiTCPIPClient_Instances[selectedInstance].parameterLoadOnReboot)
-  Script.notifyEvent("MultiTCPIPClient_OnPersistentDataModuleAvailable", multiTCPIPClient_Instances[selectedInstance].persistentModuleAvailable)
-  Script.notifyEvent("MultiTCPIPClient_OnNewParameterName", multiTCPIPClient_Instances[selectedInstance].parametersName)
+    updateUserLevel()
 
-  Script.notifyEvent("MultiTCPIPClient_OnNewTriggerEventPairList", multiTCPIPClient_Instances[selectedInstance].helperFuncs.createSpecificJsonList('commandList', multiTCPIPClient_Instances[selectedInstance].parameters.commandList))
-  Script.notifyEvent("MultiTCPIPClient_OnNewTriggerEventPairTrigger", '')
-  triggerValue = ''
-  Script.notifyEvent("MultiTCPIPClient_OnNewTriggerEventPairEvent", '')
-  eventValue = ''
-  Script.notifyEvent("MultiTCPIPClient_OnNewEventToForwardList", multiTCPIPClient_Instances[selectedInstance].helperFuncs.createSpecificJsonList('eventToForward', multiTCPIPClient_Instances[selectedInstance].parameters.forwardEvents))
-  Script.notifyEvent("MultiTCPIPClient_OnNewEventToForward", '')
-  eventToForward = ''
+    Script.notifyEvent('MultiTCPIPClient_OnNewSelectedInstance', selectedInstance)
+    Script.notifyEvent("MultiTCPIPClient_OnNewInstanceList", helperFuncs.createStringListBySize(#multiTCPIPClient_Instances))
 
-  Script.notifyEvent("MultiTCPIPClient_OnNewStatusLoadParameterOnReboot", multiTCPIPClient_Instances[selectedInstance].parameterLoadOnReboot)
-  Script.notifyEvent("MultiTCPIPClient_OnPersistentDataModuleAvailable", multiTCPIPClient_Instances[selectedInstance].persistentModuleAvailable)
-  Script.notifyEvent("MultiTCPIPClient_OnNewParameterName", multiTCPIPClient_Instances[selectedInstance].parametersName)
+    Script.notifyEvent("MultiTCPIPClient_OnNewConnectionStatus", multiTCPIPClient_Instances[selectedInstance].parameters.connectionStatus)
+    Script.notifyEvent("MultiTCPIPClient_OnNewInterfaceList", multiTCPIPClient_Instances[selectedInstance].interfaceList)
+    Script.notifyEvent("MultiTCPIPClient_OnNewInterface", multiTCPIPClient_Instances[selectedInstance].parameters.interface)
+    Script.notifyEvent("MultiTCPIPClient_OnNewServerIP", multiTCPIPClient_Instances[selectedInstance].parameters.serverIP)
+    Script.notifyEvent("MultiTCPIPClient_OnNewPort", multiTCPIPClient_Instances[selectedInstance].parameters.port)
+    Script.notifyEvent("MultiTCPIPClient_OnNewRxFrame", multiTCPIPClient_Instances[selectedInstance].parameters.rxFrame)
+    Script.notifyEvent("MultiTCPIPClient_OnNewTxFrame", multiTCPIPClient_Instances[selectedInstance].parameters.txFrame)
+    Script.notifyEvent("MultiTCPIPClient_OnNewCurrentConnectionStatus", multiTCPIPClient_Instances[selectedInstance].currentConnectionStatus)
+    Script.notifyEvent("MultiTCPIPClient_OnNewCommand", multiTCPIPClient_Instances[selectedInstance].command)
+    Script.notifyEvent("MultiTCPIPClient_OnNewStatusLoadParameterOnReboot", multiTCPIPClient_Instances[selectedInstance].parameterLoadOnReboot)
+    Script.notifyEvent("MultiTCPIPClient_OnPersistentDataModuleAvailable", multiTCPIPClient_Instances[selectedInstance].persistentModuleAvailable)
+    Script.notifyEvent("MultiTCPIPClient_OnNewParameterName", multiTCPIPClient_Instances[selectedInstance].parametersName)
 
+    Script.notifyEvent("MultiTCPIPClient_OnNewTriggerEventPairList", multiTCPIPClient_Instances[selectedInstance].helperFuncs.createSpecificJsonList('commandList', multiTCPIPClient_Instances[selectedInstance].parameters.commandList))
+    Script.notifyEvent("MultiTCPIPClient_OnNewTriggerEventPairTrigger", '')
+    triggerValue = ''
+    Script.notifyEvent("MultiTCPIPClient_OnNewTriggerEventPairEvent", '')
+    eventValue = ''
+    Script.notifyEvent("MultiTCPIPClient_OnNewEventToForwardList", multiTCPIPClient_Instances[selectedInstance].helperFuncs.createSpecificJsonList('eventToForward', multiTCPIPClient_Instances[selectedInstance].parameters.forwardEvents))
+    Script.notifyEvent("MultiTCPIPClient_OnNewEventToForward", '')
+    eventToForward = ''
+    Script.notifyEvent("MultiTCPIPClient_OnNewStatusFlowConfigPriority", multiTCPIPClient_Instances[selectedInstance].parameters.flowConfigPriority)
+    Script.notifyEvent("MultiTCPIPClient_OnNewStatusLoadParameterOnReboot", multiTCPIPClient_Instances[selectedInstance].parameterLoadOnReboot)
+    Script.notifyEvent("MultiTCPIPClient_OnPersistentDataModuleAvailable", multiTCPIPClient_Instances[selectedInstance].persistentModuleAvailable)
+    Script.notifyEvent("MultiTCPIPClient_OnNewParameterName", multiTCPIPClient_Instances[selectedInstance].parametersName)
+  end
 end
 Timer.register(tmrMultiTCPIPClient, "OnExpired", handleOnExpiredTmrMultiTCPIPClient)
 
 -- ********************* UI Setting / Submit Functions Start ********************
 
 local function pageCalled()
-  updateUserLevel() -- try to hide user specific content asap
+  if _G.availableAPIs.default and _G.availableAPIs.specific then
+    updateUserLevel() -- try to hide user specific content asap
+  end
   tmrMultiTCPIPClient:start()
   return ''
 end
@@ -230,7 +244,11 @@ end
 Script.serveFunction("CSK_MultiTCPIPClient.setSelectedInstance", setSelectedInstance)
 
 local function getInstancesAmount ()
-  return #multiTCPIPClient_Instances
+  if multiTCPIPClient_Instances then
+    return #multiTCPIPClient_Instances
+  else
+    return 0
+  end
 end
 Script.serveFunction("CSK_MultiTCPIPClient.getInstancesAmount", getInstancesAmount)
 
@@ -369,6 +387,7 @@ end
 Script.serveFunction("CSK_MultiTCPIPClient.addTriggerEventPair", addTriggerEventPair)
 
 local function deleteTriggerEventPair(trigger)
+  Script.notifyEvent('MultiTCPIPClient_OnNewProcessingParameter', selectedInstance, 'removeTrigger', trigger)
   multiTCPIPClient_Instances[selectedInstance].parameters.commandList[trigger] = nil
   Script.notifyEvent("MultiTCPIPClient_OnNewTriggerEventPairList", multiTCPIPClient_Instances[selectedInstance].helperFuncs.createSpecificJsonList('commandList', multiTCPIPClient_Instances[selectedInstance].parameters.commandList))
 end
@@ -480,8 +499,30 @@ local function updateProcessingParameters()
   for trigger, event in pairs(multiTCPIPClient_Instances[selectedInstance].parameters.commandList) do
     Script.notifyEvent('MultiTCPIPClient_OnNewProcessingParameter', selectedInstance, 'addTrigger', trigger, event)
   end
-
 end
+
+local function getStatusModuleActive()
+  return _G.availableAPIs.default and _G.availableAPIs.specific
+end
+Script.serveFunction('CSK_MultiTCPIPClient.getStatusModuleActive', getStatusModuleActive)
+
+local function clearFlowConfigRelevantConfiguration()
+  for i = 1, #multiTCPIPClient_Instances do
+    for key, value in pairs(multiTCPIPClient_Instances[i].parameters.forwardEvents) do
+      deleteEventToForward(value)
+    end
+  end
+end
+Script.serveFunction('CSK_MultiTCPIPClient.clearFlowConfigRelevantConfiguration', clearFlowConfigRelevantConfiguration)
+
+local function getParameters(instanceNo)
+  if instanceNo <= #multiTCPIPClient_Instances then
+    return helperFuncs.json.encode(multiTCPIPClient_Instances[instanceNo].parameters)
+  else
+    return ''
+  end
+end
+Script.serveFunction('CSK_MultiTCPIPClient.getParameters', getParameters)
 
 -- *****************************************************************
 -- Following function can be adapted for CSK_PersistentData module usage
@@ -493,7 +534,7 @@ local function setParameterName(name)
 end
 Script.serveFunction("CSK_MultiTCPIPClient.setParameterName", setParameterName)
 
-local function sendParameters()
+local function sendParameters(noDataSave)
   if multiTCPIPClient_Instances[selectedInstance].persistentModuleAvailable then
     CSK_PersistentData.addParameter(helperFuncs.convertTable2Container(multiTCPIPClient_Instances[selectedInstance].parameters), multiTCPIPClient_Instances[selectedInstance].parametersName)
 
@@ -504,7 +545,9 @@ local function sendParameters()
       CSK_PersistentData.setModuleParameterName(nameOfModule, multiTCPIPClient_Instances[selectedInstance].parametersName, multiTCPIPClient_Instances[selectedInstance].parameterLoadOnReboot, tostring(selectedInstance))
     end
     _G.logger:fine(nameOfModule .. ": Send MultiTCPIPClient parameters with name '" .. multiTCPIPClient_Instances[selectedInstance].parametersName .. "' to CSK_PersistentData module.")
-    CSK_PersistentData.saveData()
+    if not noDataSave then
+      CSK_PersistentData.saveData()
+    end
   else
     _G.logger:warning(nameOfModule .. ": CSK_PersistentData module not available.")
   end
@@ -516,7 +559,7 @@ local function loadParameters()
   if multiTCPIPClient_Instances[selectedInstance].persistentModuleAvailable then
     local data = CSK_PersistentData.getParameter(multiTCPIPClient_Instances[selectedInstance].parametersName)
     if data then
-      _G.logger:fine(nameOfModule .. ": Loaded parameters for multiTCPIPClientObject " .. tostring(selectedInstance) .. " from CSK_PersistentData module.")
+      _G.logger:info(nameOfModule .. ": Loaded parameters for multiTCPIPClientObject " .. tostring(selectedInstance) .. " from CSK_PersistentData module.")
       multiTCPIPClient_Instances[selectedInstance].parameters = helperFuncs.convertContainer2Table(data)
 
       -- If something needs to be configured/activated with new loaded data
@@ -526,65 +569,99 @@ local function loadParameters()
         Script.notifyEvent('MultiTCPIPClient_OnNewProcessingParameter', selectedInstance, 'connect')
       end
 
-      CSK_MultiTCPIPClient.pageCalled()
+      tmrMultiTCPIPClient:start()
+      return true
     else
       _G.logger:warning(nameOfModule .. ": Loading parameters from CSK_PersistentData module did not work.")
+      tmrMultiTCPIPClient:start()
+      return false
     end
   else
     _G.logger:warning(nameOfModule .. ": CSK_PersistentData module not available.")
+    tmrMultiTCPIPClient:start()
+    return false
   end
-  tmrMultiTCPIPClient:start()
 end
 Script.serveFunction("CSK_MultiTCPIPClient.loadParameters", loadParameters)
 
 local function setLoadOnReboot(status)
   multiTCPIPClient_Instances[selectedInstance].parameterLoadOnReboot = status
   _G.logger:fine(nameOfModule .. ": Set new status to load setting on reboot: " .. tostring(status))
+  Script.notifyEvent("MultiTCPIPClient_OnNewStatusLoadParameterOnReboot", status)
 end
 Script.serveFunction("CSK_MultiTCPIPClient.setLoadOnReboot", setLoadOnReboot)
+
+local function setFlowConfigPriority(status)
+  multiTCPIPClient_Instances[selectedInstance].parameters.flowConfigPriority = status
+  _G.logger:fine(nameOfModule .. ": Set new status of FlowConfig priority: " .. tostring(status))
+  Script.notifyEvent("MultiTCPIPClient_OnNewStatusFlowConfigPriority", multiTCPIPClient_Instances[selectedInstance].parameters.flowConfigPriority)
+end
+Script.serveFunction('CSK_MultiTCPIPClient.setFlowConfigPriority', setFlowConfigPriority)
 
 --- Function to react on initial load of persistent parameters
 local function handleOnInitialDataLoaded()
 
-  _G.logger:fine(nameOfModule .. ': Try to initially load parameter from CSK_PersistentData module.')
-  if string.sub(CSK_PersistentData.getVersion(), 1, 1) == '1' then
+  if _G.availableAPIs.default and _G.availableAPIs.specific then
+    _G.logger:fine(nameOfModule .. ': Try to initially load parameter from CSK_PersistentData module.')
+    if string.sub(CSK_PersistentData.getVersion(), 1, 1) == '1' then
 
-    _G.logger:warning(nameOfModule .. ': CSK_PersistentData module is too old and will not work. Please update CSK_PersistentData module.')
+      _G.logger:warning(nameOfModule .. ': CSK_PersistentData module is too old and will not work. Please update CSK_PersistentData module.')
 
-    for j = 1, #multiTCPIPClient_Instances do
-      multiTCPIPClient_Instances[j].persistentModuleAvailable = false
-    end
-  else
-    -- Check if CSK_PersistentData version is >= 3.0.0
-    if tonumber(string.sub(CSK_PersistentData.getVersion(), 1, 1)) >= 3 then
-      local parameterName, loadOnReboot, totalInstances = CSK_PersistentData.getModuleParameterName(nameOfModule, '1')
-      -- Check for amount if instances to create
-      if totalInstances then
-        local c = 2
-        while c <= totalInstances do
-          addInstance()
-          c = c+1
+      for j = 1, #multiTCPIPClient_Instances do
+        multiTCPIPClient_Instances[j].persistentModuleAvailable = false
+      end
+    else
+      -- Check if CSK_PersistentData version is >= 3.0.0
+      if tonumber(string.sub(CSK_PersistentData.getVersion(), 1, 1)) >= 3 then
+        local parameterName, loadOnReboot, totalInstances = CSK_PersistentData.getModuleParameterName(nameOfModule, '1')
+        -- Check for amount if instances to create
+        if totalInstances then
+          local c = 2
+          while c <= totalInstances do
+            addInstance()
+            c = c+1
+          end
         end
       end
-    end
 
-    for i = 1, #multiTCPIPClient_Instances do
-      local parameterName, loadOnReboot = CSK_PersistentData.getModuleParameterName(nameOfModule, tostring(i))
+      if not multiTCPIPClient_Instances then
+          return
+        end
 
-      if parameterName then
-        multiTCPIPClient_Instances[i].parametersName = parameterName
-        multiTCPIPClient_Instances[i].parameterLoadOnReboot = loadOnReboot
+      for i = 1, #multiTCPIPClient_Instances do
+        local parameterName, loadOnReboot = CSK_PersistentData.getModuleParameterName(nameOfModule, tostring(i))
+
+        if parameterName then
+          multiTCPIPClient_Instances[i].parametersName = parameterName
+          multiTCPIPClient_Instances[i].parameterLoadOnReboot = loadOnReboot
+        end
+
+        if multiTCPIPClient_Instances[i].parameterLoadOnReboot then
+          setSelectedInstance(i)
+          loadParameters()
+        end
       end
-
-      if multiTCPIPClient_Instances[i].parameterLoadOnReboot then
-        setSelectedInstance(i)
-        loadParameters()
-      end
+      Script.notifyEvent('MultiTCPIPClient_OnDataLoadedOnReboot')
     end
-    Script.notifyEvent('MultiTCPIPClient_OnDataLoadedOnReboot')
   end
 end
 Script.register("CSK_PersistentData.OnInitialDataLoaded", handleOnInitialDataLoaded)
+
+local function resetModule()
+  if _G.availableAPIs.default and _G.availableAPIs.specific then
+    clearFlowConfigRelevantConfiguration()
+    for i = 1, #multiTCPIPClient_Instances do
+      setConnectionStatus(false)
+    end
+    pageCalled()
+  end
+end
+Script.serveFunction('CSK_MultiTCPIPClient.resetModule', resetModule)
+Script.register("CSK_PersistentData.OnResetAllModules", resetModule)
+
+-- *************************************************
+-- END of functions for CSK_PersistentData module usage
+-- *************************************************
 
 return funcs
 

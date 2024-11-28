@@ -14,12 +14,15 @@ In case of using the SICK AppEngine please keep in mind for selecting the ethern
 
 ## Information
 
-Tested on:
+Tested on  
+
 |Device|Firmware|Module version|
 |--|--|--|
+|SIM1012|v2.4.2|v2.0.0|
 |SIM1012|v2.4.1|v1.0.0|
 |SIM1012|v2.3.0|v1.0.0|
 |SIM2000|v1.6.0|v1.0.0|
+|SICK AppEngine|v1.7.0|v2.0.0|
 |SICK AppEngine|v1.5.0|v1.0.0|
 |InspectorP631|v4.2.1|v1.0.0|
 |InspectorP631|v4.0.0|v1.0.0|

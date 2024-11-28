@@ -13,11 +13,21 @@ local nameOfModule = 'CSK_MultiTCPIPClient'
 local multiTCPIPClient = {}
 multiTCPIPClient.__index = multiTCPIPClient
 
+multiTCPIPClient.styleForUI = 'None' -- Optional parameter to set UI style
+multiTCPIPClient.version = Engine.getCurrentAppVersion() -- Version of module
+
 --**************************************************************************
 --********************** End Global Scope **********************************
 --**************************************************************************
 --**********************Start Function Scope *******************************
 --**************************************************************************
+
+--- Function to react on UI style change
+local function handleOnStyleChanged(theme)
+  multiTCPIPClient.styleForUI = theme
+  Script.notifyEvent("MultiTCPIPClient_OnNewStatusCSKStyle", multiTCPIPClient.styleForUI)
+end
+Script.register('CSK_PersistentData.OnNewStatusCSKStyle', handleOnStyleChanged)
 
 --- Function to create new instance
 ---@param multiTCPIPClientInstanceNo int Number of instance
@@ -53,6 +63,7 @@ function multiTCPIPClient.create(multiTCPIPClientInstanceNo)
 
   -- Parameters to be saved permanently if wanted
   self.parameters = {}
+  self.parameters.flowConfigPriority = CSK_FlowConfig ~= nil or false -- Status if FlowConfig should have priority for FlowConfig relevant configurations
   self.parameters.processingFile = 'CSK_MultiTCPIPClient_Processing' -- which file to use for processing (will be started in own thread)
 
   self.parameters.connectionStatus = false -- Configure module to try to connect to server

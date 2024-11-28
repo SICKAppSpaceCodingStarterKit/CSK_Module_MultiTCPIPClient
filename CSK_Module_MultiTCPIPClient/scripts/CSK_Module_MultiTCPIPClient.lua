@@ -22,16 +22,14 @@
 
 ---@diagnostic disable: undefined-global, redundant-parameter, missing-parameter
 
--- 
--- CreationTemplateVersion: 3.6.0
 --**************************************************************************
 --**********************Start Global Scope *********************************
 --**************************************************************************
-
 -- If app property "LuaLoadAllEngineAPI" is FALSE, use this to load and check for required APIs
 -- This can improve performance of garbage collection
  _G.availableAPIs = require('Communication/MultiTCPIPClient/helper/checkAPIs') -- can be used to adjust function scope of the module related on available APIs of the device
------------------------------------------------------------
+
+ -----------------------------------------------------------
 -- Logger
 _G.logger = Log.SharedLogger.create('ModuleLogger')
 _G.logHandle = Log.Handler.create()
@@ -46,12 +44,19 @@ _G.logHandle:applyConfig()
 local multiTCPIPClient_Model = require('Communication/MultiTCPIPClient/MultiTCPIPClient_Model')
 
 local multiTCPIPClient_Instances = {} -- Handle all instances
-table.insert(multiTCPIPClient_Instances, multiTCPIPClient_Model.create(1)) -- Create at least 1 instance
 
 -- Load script to communicate with the MultiTCPIPClient_Model UI
 -- Check / edit this script to see/edit functions which communicate with the UI
 local multiTCPIPClientController = require('Communication/MultiTCPIPClient/MultiTCPIPClient_Controller')
-multiTCPIPClientController.setMultiTCPIPClient_Instances_Handle(multiTCPIPClient_Instances) -- share handle of instances
+
+if _G.availableAPIs.default and _G.availableAPIs.specific then
+  local setInstanceHandle = require('Communication/MultiTCPIPClient/FlowConfig/MultiTCPIPClient_FlowConfig')
+  table.insert(multiTCPIPClient_Instances, multiTCPIPClient_Model.create(1)) -- Create at least 1 instance
+  multiTCPIPClientController.setMultiTCPIPClient_Instances_Handle(multiTCPIPClient_Instances) -- share handle of instances
+  setInstanceHandle(multiTCPIPClient_Instances)
+else
+  _G.logger:warning("CSK_MultiTCPIPClient: Relevant CROWN(s) not available on device. Module is not supported...")
+end
 
 --**************************************************************************
 --**********************End Global Scope ***********************************
@@ -81,7 +86,7 @@ local function main()
   CSK_MultiTCPIPClient.setRxFraming('STX-ETX')
   CSK_MultiTCPIPClient.setTxFraming('STX-ETX')
 
-  CSK_MultiTCPIPClient.startTCPIPClient()
+  CSK_MultiTCPIPClient.setConnectionStatus(true)
 
   CSK_MultiTCPIPClient.transmitData1('TestData')
 
@@ -94,7 +99,9 @@ local function main()
   ]]
   ----------------------------------------------------------------------------------------
 
-  CSK_MultiTCPIPClient.setSelectedInstance(1)
+  if _G.availableAPIs.default and _G.availableAPIs.specific then
+    CSK_MultiTCPIPClient.setSelectedInstance(1)
+  end
   CSK_MultiTCPIPClient.pageCalled() -- Update UI
 
 end
