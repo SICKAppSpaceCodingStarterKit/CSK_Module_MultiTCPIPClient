@@ -467,9 +467,19 @@ local function setTxFraming(frame)
 end
 Script.serveFunction("CSK_MultiTCPIPClient.setTxFraming", setTxFraming)
 
+local function replaceHex(value)
+  local subString = string.sub(value, 3, 4)
+  if multiTCPIPClient_Instances[selectedInstance].hexValues[subString] then
+    return multiTCPIPClient_Instances[selectedInstance].hexValues[subString]
+  else
+    return value
+  end
+end
+
 local function setCommand(cmd)
   _G.logger:fine(nameOfModule .. ": Preset command to send = " .. tostring(cmd))
-  multiTCPIPClient_Instances[selectedInstance].command = cmd
+  local res = string.gsub(cmd, "\\x+%w%w", replaceHex)
+  multiTCPIPClient_Instances[selectedInstance].command = res
 end
 Script.serveFunction("CSK_MultiTCPIPClient.setCommand", setCommand)
 
@@ -508,8 +518,10 @@ Script.serveFunction('CSK_MultiTCPIPClient.getStatusModuleActive', getStatusModu
 
 local function clearFlowConfigRelevantConfiguration()
   for i = 1, #multiTCPIPClient_Instances do
-    for key, value in pairs(multiTCPIPClient_Instances[i].parameters.forwardEvents) do
-      deleteEventToForward(value)
+    if multiTCPIPClient_Instances[i].parameters.flowConfigPriority then
+      for key, value in pairs(multiTCPIPClient_Instances[i].parameters.forwardEvents) do
+        deleteEventToForward(value)
+      end
     end
   end
 end
@@ -561,6 +573,8 @@ local function loadParameters()
     if data then
       _G.logger:info(nameOfModule .. ": Loaded parameters for multiTCPIPClientObject " .. tostring(selectedInstance) .. " from CSK_PersistentData module.")
       multiTCPIPClient_Instances[selectedInstance].parameters = helperFuncs.convertContainer2Table(data)
+
+      multiTCPIPClient_Instances[selectedInstance].parameters = helperFuncs.checkParameters(multiTCPIPClient_Instances[selectedInstance].parameters, helperFuncs.defaultParameters.getParameters())
 
       -- If something needs to be configured/activated with new loaded data
       updateProcessingParameters()
@@ -649,8 +663,10 @@ Script.register("CSK_PersistentData.OnInitialDataLoaded", handleOnInitialDataLoa
 
 local function resetModule()
   if _G.availableAPIs.default and _G.availableAPIs.specific then
-    clearFlowConfigRelevantConfiguration()
     for i = 1, #multiTCPIPClient_Instances do
+      for key, value in pairs(multiTCPIPClient_Instances[i].parameters.forwardEvents) do
+        deleteEventToForward(value)
+      end
       setConnectionStatus(false)
     end
     pageCalled()

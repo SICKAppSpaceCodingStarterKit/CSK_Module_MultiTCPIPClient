@@ -6,13 +6,12 @@
         <layout-row id="RowLayout22">
             <layout-column id="ColumnLayout23" style="align-items: stretch">
                 <layout-row id="RowLayout01" style="align-items: baseline">
-                    <davinci-value-display id="VD_Title" class="myCustomLabel_CSK_Module_MultiTCPIPClient"
-                        value="TCP/IP Client">
-                    </davinci-value-display>
+                    <h1 id="Heading_Title" class="myCustomLabel_CSK_Module_MultiTCPIPClient">
+                        TCP/IP Client
+                    </h1>
                     <davinci-value-display id="VD_Version">
-                        <crown-edpws-binding property="value" name="CSK_MultiTCPIPClient/OnNewStatusModuleVersion"
-                            update-on-resume>
-                        </crown-edpws-binding>
+                        <crown-on property="value" crown-event="CSK_MultiTCPIPClient/OnNewStatusModuleVersion">
+                        </crown-on>
                     </davinci-value-display>
                 </layout-row>
             </layout-column>
@@ -59,8 +58,8 @@
                                                     style="align-items: center; justify-content: center">
                                                     <davinci-button id="Button_AddInstance"
                                                         class="myCustomButton_CSK_Module_MultiTCPIPClient"
-                                                        type="outline" icon-position="append" title="Add instance"
-                                                        icon="content/add">
+                                                        type="outline" title="Add instance">
+                                                        <davinci-icon icon="content/add"></davinci-icon>
                                                         <span></span>
                                                         <crown-binding event="submit"
                                                             name="CSK_MultiTCPIPClient/addInstance" auto-commit>
@@ -68,9 +67,9 @@
                                                     </davinci-button>
                                                     <davinci-button id="Button_ResetInstances"
                                                         class="myCustomButton_CSK_Module_MultiTCPIPClient"
-                                                        type="outline" icon-position="append"
-                                                        title="Reset insances to single instance. Reload app after reseting."
-                                                        icon="action/delete">
+                                                        type="outline"
+                                                        title="Reset insances to single instance. Reload app after reseting.">
+                                                        <davinci-icon icon="action/delete"></davinci-icon>
                                                         <span></span>
                                                         <crown-binding event="submit"
                                                             name="CSK_MultiTCPIPClient/resetInstances" auto-commit>
@@ -116,9 +115,9 @@
                                                             style="justify-content: center; align-items: center">
                                                             <davinci-button id="B_LoadConfig"
                                                                 class="myCustomButton_CSK_Module_MultiTCPIPClient"
-                                                                type="outline" icon-position="append"
-                                                                title="Load configured parameters from CSK_PersistentData module."
-                                                                icon="action/history">
+                                                                type="outline"
+                                                                title="Load configured parameters from CSK_PersistentData module.">
+                                                                <davinci-icon icon="action/history"></davinci-icon>
                                                                 <span></span>
                                                                 <crown-binding event="submit"
                                                                     name="CSK_MultiTCPIPClient/loadParameters"
@@ -132,9 +131,9 @@
                                                             </davinci-button>
                                                             <davinci-button id="B_SaveConfig"
                                                                 class="myCustomButton_CSK_Module_MultiTCPIPClient"
-                                                                type="outline" icon-position="append"
-                                                                title="Save current configured parameters of this module within CSK_PersistentData module."
-                                                                icon="content/save">
+                                                                type="outline"
+                                                                title="Save current configured parameters of this module within CSK_PersistentData module.">
+                                                                <davinci-icon icon="content/save"></davinci-icon>
                                                                 <span></span>
                                                                 <crown-binding event="submit"
                                                                     name="CSK_MultiTCPIPClient/sendParameters"
@@ -283,7 +282,8 @@
                                     <layout-column id="ColumnLayout12" style="align-items: center">
                                         <davinci-button id="B_Transmit"
                                             class="myCustomButton_CSK_Module_MultiTCPIPClient" type="outline"
-                                            icon-position="append" icon="content/send" title="Transmit">
+                                            title="Transmit">
+                                            <davinci-icon icon="content/send"></davinci-icon>
                                             <span></span>
                                             <crown-set event="submit"
                                                 crown-function="CSK_MultiTCPIPClient/transmitCommando"
@@ -297,9 +297,8 @@
                                     </layout-column>
                                 </layout-row>
                                 <davinci-text-area id="TA_MessageLog" label="Message Log:" style="height: 500px">
-                                    <crown-edpws-binding property="value" name="CSK_MultiTCPIPClient/OnNewLog"
-                                        update-on-resume>
-                                    </crown-edpws-binding>
+                                    <crown-on property="value" crown-event="CSK_MultiTCPIPClient/OnNewLog">
+                                    </crown-on>
                                 </davinci-text-area>
                                 <layout-row id="RowLayout2" class="myCustomSpacerVert10_CSK_Module_MultiTCPIPClient">
                                 </layout-row>
@@ -521,9 +520,9 @@
                                                                     style="justify-content: space-evenly; align-items: center">
                                                                     <davinci-button id="B_AddEventTriggerPair"
                                                                         class="myCustomButton_CSK_Module_MultiTCPIPClient"
-                                                                        type="primary" icon-position="append"
-                                                                        title="Add" icon="content/add"
+                                                                        type="primary" title="Add"
                                                                         style="align-self: stretch; width: 100%">
+                                                                        <davinci-icon icon="content/add"></davinci-icon>
                                                                         <span></span>
                                                                         <crown-binding event="submit"
                                                                             name="CSK_MultiTCPIPClient/addTriggerEventPairViaUI"
@@ -532,9 +531,10 @@
                                                                     </davinci-button>
                                                                     <davinci-button id="B_DeleteEventTriggerPair"
                                                                         class="myCustomButton_CSK_Module_MultiTCPIPClient"
-                                                                        type="outline" icon-position="append"
-                                                                        title="Delete" icon="action/delete"
+                                                                        type="outline" title="Delete"
                                                                         style="align-self: stretch; width: 100%">
+                                                                        <davinci-icon icon="action/delete">
+                                                                        </davinci-icon>
                                                                         <span></span>
                                                                         <crown-binding event="submit"
                                                                             name="CSK_MultiTCPIPClient/deleteTriggerEventPairViaUI"
@@ -608,9 +608,9 @@
                                                                     style="justify-content: space-evenly">
                                                                     <davinci-button id="B_AddEventToForward"
                                                                         class="myCustomButton_CSK_Module_MultiTCPIPClient"
-                                                                        type="primary" icon-position="append"
-                                                                        title="Add event to register to and to forward its content to TCP/IP server."
-                                                                        icon="content/add">
+                                                                        type="primary"
+                                                                        title="Add event to register to and to forward its content to TCP/IP server.">
+                                                                        <davinci-icon icon="content/add"></davinci-icon>
                                                                         <span></span>
                                                                         <crown-binding event="submit"
                                                                             name="CSK_MultiTCPIPClient/addEventToForwardViaUI"
@@ -623,8 +623,9 @@
                                                                     </davinci-button>
                                                                     <davinci-button id="B_DeleteEventToForward"
                                                                         class="myCustomButton_CSK_Module_MultiTCPIPClient"
-                                                                        type="outline" icon-position="append"
-                                                                        title="Delete" icon="action/delete">
+                                                                        type="outline" title="Delete">
+                                                                        <davinci-icon icon="action/delete">
+                                                                        </davinci-icon>
                                                                         <span></span>
                                                                         <crown-binding event="submit"
                                                                             name="CSK_MultiTCPIPClient/deleteEventToForwardViaUI"

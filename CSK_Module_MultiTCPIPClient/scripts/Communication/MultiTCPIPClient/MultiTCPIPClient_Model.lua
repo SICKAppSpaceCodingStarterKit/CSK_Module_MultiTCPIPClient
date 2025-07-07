@@ -40,6 +40,7 @@ function multiTCPIPClient.create(multiTCPIPClientInstanceNo)
   self.multiTCPIPClientInstanceNo = multiTCPIPClientInstanceNo -- Number of this instance
   self.multiTCPIPClientInstanceNoString = tostring(self.multiTCPIPClientInstanceNo) -- Number of this instance as string
   self.helperFuncs = require('Communication/MultiTCPIPClient/helper/funcs') -- Load helper functions
+  self.hexValues = require('Communication/MultiTCPIPClient/helper/hexValues') -- Hex values
 
   -- Create parameters etc. for this module instance
   self.activeInUI = false -- Check if this instance is currently active in UI
@@ -63,27 +64,14 @@ function multiTCPIPClient.create(multiTCPIPClientInstanceNo)
 
   -- Parameters to be saved permanently if wanted
   self.parameters = {}
-  self.parameters.flowConfigPriority = CSK_FlowConfig ~= nil or false -- Status if FlowConfig should have priority for FlowConfig relevant configurations
-  self.parameters.processingFile = 'CSK_MultiTCPIPClient_Processing' -- which file to use for processing (will be started in own thread)
+  self.parameters = self.helperFuncs.defaultParameters.getParameters() -- Load default parameters
 
-  self.parameters.connectionStatus = false -- Configure module to try to connect to server
-
-  -- List of incoming trigger commands to forward as events
-  -- e.g. "commandList['TRG'] = 'OnNewTrigger' will trigger the event "CSK_TCPIPClient.OnNewTrigger" if receiving 'TRG' via TCP/IP connection
-  self.parameters.commandList = {}
-
-  -- List of events to register to and forward content to TCP/IP server
-  self.parameters.forwardEvents = {}
-
+  -- Instance specific parameters
   if self.availableInterfaces then
     self.parameters.interface = self.availableInterfaces[1] -- e.g. 'ETH1' -- Select first available ethernet interface per default
   else
     self.parameters.interface = nil
   end
-  self.parameters.serverIP = '192.168.0.202' -- IP of TCP/IP server
-  self.parameters.port = 1234 -- Port of TCP/IP connection
-  self.parameters.rxFrame = 'STX-ETX' -- OR 'empty' -- RX Frame
-  self.parameters.txFrame = 'STX-ETX' -- OR 'empty' -- TX Frame
 
   -- Parameters to give to the processing script
   self.multiTCPIPClientProcessingParams = Container.create()
@@ -97,7 +85,7 @@ function multiTCPIPClient.create(multiTCPIPClientInstanceNo)
   self.multiTCPIPClientProcessingParams:add('serverIP', self.parameters.serverIP, "STRING")
   self.multiTCPIPClientProcessingParams:add('port', self.parameters.port, "INT")
   self.multiTCPIPClientProcessingParams:add('rxFrame', self.parameters.rxFrame, "STRING")
-  self.multiTCPIPClientProcessingParams:add('txFrame', self.parameters.txFrame, "STRING")  
+  self.multiTCPIPClientProcessingParams:add('txFrame', self.parameters.txFrame, "STRING")
 
   -- Handle processing
   Script.startScript(self.parameters.processingFile, self.multiTCPIPClientProcessingParams)
