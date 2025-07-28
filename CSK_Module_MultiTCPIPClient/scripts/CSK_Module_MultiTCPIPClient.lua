@@ -50,10 +50,9 @@ local multiTCPIPClient_Instances = {} -- Handle all instances
 local multiTCPIPClientController = require('Communication/MultiTCPIPClient/MultiTCPIPClient_Controller')
 
 if _G.availableAPIs.default and _G.availableAPIs.specific then
-  local setInstanceHandle = require('Communication/MultiTCPIPClient/FlowConfig/MultiTCPIPClient_FlowConfig')
+  require('Communication/MultiTCPIPClient/FlowConfig/MultiTCPIPClient_FlowConfig')
   table.insert(multiTCPIPClient_Instances, multiTCPIPClient_Model.create(1)) -- Create at least 1 instance
   multiTCPIPClientController.setMultiTCPIPClient_Instances_Handle(multiTCPIPClient_Instances) -- share handle of instances
-  setInstanceHandle(multiTCPIPClient_Instances)
 else
   _G.logger:warning("CSK_MultiTCPIPClient: Relevant CROWN(s) not available on device. Module is not supported...")
 end

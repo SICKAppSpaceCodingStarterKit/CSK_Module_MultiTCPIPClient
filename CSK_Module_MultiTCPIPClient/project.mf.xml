@@ -203,7 +203,8 @@ NUM will be replaced by the number of instance (e.g. "OnNewResult1"). +</desc>
                     <param desc="Port" multiplicity="1" name="port" type="int"/>
                 </function>
                 <function name="setCommand">
-                    <desc>Set command to transmit via TCP/IP if triggered via "transmitCommando() (used in modules UI).</desc>
+                    <desc>Set command to transmit via TCP/IP if triggered via "transmitCommando() (used in modules UI). +
+HEX values can be used like this: '\x03'.</desc>
                     <param desc="Command to transmit." multiplicity="1" name="cmd" type="string"/>
                 </function>
                 <function name="transmitCommando">
@@ -391,7 +392,7 @@ IMPORTANT: As instances start their own threads, the module needs to be restarte
             </crown>
         </crown>
         <meta key="author">SICK AG</meta>
-        <meta key="version">2.0.0</meta>
+        <meta key="version">2.1.0</meta>
         <meta key="priority">low</meta>
         <meta key="copy-protected">false</meta>
         <meta key="read-protected">false</meta>
